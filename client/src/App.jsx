@@ -1,11 +1,17 @@
-import { Button } from './components/ui/button'
+import React from 'react'
+import Navbar from './component/Navbar/Navbar'
+import Auth from './pages/Auth/Auth'
+import { Routes, Route} from 'react-router'
+import Home from './pages/Home/Home'
 
-function App() {
-  
+const App = () => {
   return (
     <>
-      <Button className='bg-red-600'>Check</Button>
-      <h1 className='bg-red-600'>Hello</h1>
+      <Navbar/>
+      <Routes>
+        <Route path='/auth' element={<Auth/>}/>
+        <Route path="/" element={<Home/>}/>
+      </Routes>
     </>
   )
 }

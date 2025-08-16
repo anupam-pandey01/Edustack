@@ -10,7 +10,7 @@ async function registerUser(req, res){
 
         const existUser = await User.findOne({$or: [{username}, {email}]});
         if(existUser){
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: "username or email already exist"
             })
@@ -44,10 +44,13 @@ async function loginUser(req, res){
         const {email, password} = req.body;
 
         const user = await User.findOne({email});
-        const isMatch = bcrypt.compare(password, user.password);
+        if(!user){
+            return res.status(404).json({ success: false, message: "Invalid username or password" }) 
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
         if(user && isMatch){
             const token = jwt.sign({id: user._id}, process.env.SECRET_KEY, {expiresIn: "24h"})
-            res.status(200).json({
+             res.status(200).json({
                 success: true,
                 message: "Login Successfully",
                 token

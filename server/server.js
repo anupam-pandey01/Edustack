@@ -9,11 +9,14 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
-cors({
-    origin: "*",
-    methods:["GET", "POST", "DELETE", "PUT"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-});
+// cors({
+//     origin: "*"
+// methods:["GET", "POST", "DELETE", "PUT"],
+// allowedHeaders: ["Content-Type", "Authorization"]
+// });
+
+app.use(cors({origin: "*"}));
+
 
 
 app.use(express.json());
