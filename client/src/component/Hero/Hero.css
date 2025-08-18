@@ -17,7 +17,7 @@
 .hero-head p{
     font-size: 13px;
     margin-top: 10px;
-    color: #6d6d6d;
+    color: #5b5b5b;
 }
 .hero-head .search-button{
     border: none;
@@ -34,16 +34,17 @@
     border-radius: 5px;
     border: 1px solid #c5c5c5;
     min-width: 36%;
-    padding: 4px 4px;
+    padding: 1px 1px;
     gap: 4px;
+    overflow: hidden;
 }
 .input-section input{
     flex: 1;
     width: 86%;
-    padding: 8px 2px;
+    padding: 8px 8px;
     border: none;
     outline: none;
-    font-size: 16px;
+    font-size: 15px;
 }
 .input-section button{
     border: none;

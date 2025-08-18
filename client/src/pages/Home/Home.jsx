@@ -4,9 +4,10 @@ import Hero from '../../component/Hero/Hero'
 import KeyBenefit from '../../component/KeyBenefit/KeyBenefit'
 const Home = () => {
   return (
-    <>
+    <div className='home'>
       <Hero/>
-    </>
+      <KeyBenefit/>
+    </div>
   )
 }
 

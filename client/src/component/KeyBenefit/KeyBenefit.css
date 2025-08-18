@@ -1,0 +1,45 @@
+.card-container{
+    width: 100%;
+}
+.card-container h1{
+    width: 100%;
+    text-align: center;
+    margin-top: 80px;
+    font-size: 30px;
+    color: #282828;
+}
+.card-container p{
+    text-align: center;
+    font-size: 13px;
+    color:#5b5b5b
+}
+.key-benefit-section{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    margin-top: 18px;
+}
+.key-benefit{
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #dbdada;
+    gap: 8px;
+    padding: 16px 0px;
+    background-color: #fffefe;
+    border-radius: 10px;
+    box-shadow: rgba(139, 141, 142, 0.2) 0px 8px 24px;
+}
+.key-benefit-section .key-benefit img{
+    width: 90px;
+}
+.key-benefit-section .key-benefit h2{
+    color: #282828;
+}
+.key-benefit-section .key-benefit p{
+    font-size: 13px;
+    color: #5b5b5b;
+}
