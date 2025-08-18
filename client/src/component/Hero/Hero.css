@@ -1,0 +1,56 @@
+.hero-section{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    /* max-width: 1000px; */
+    margin-top: 120px;
+    text-align: center;
+    gap: 20px;
+}
+.hero-head h1{
+    /* margin:0px auto; */
+    font-size: 45px;
+    line-height: 1.2;
+    color: #282828;
+}
+.hero-head p{
+    font-size: 13px;
+    margin-top: 10px;
+    color: #6d6d6d;
+}
+.hero-head .search-button{
+    border: none;
+    margin-top: 16px;
+    color: #fff;
+    background-color: #0e4af0;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 24px;
+}
+.input-section{
+    display: flex;
+    border-radius: 5px;
+    border: 1px solid #c5c5c5;
+    min-width: 36%;
+    padding: 4px 4px;
+    gap: 4px;
+}
+.input-section input{
+    flex: 1;
+    width: 86%;
+    padding: 8px 2px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+.input-section button{
+    border: none;
+    padding: 8px 16px;
+    color: #fff;
+    background-color: #0e4af0;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 400;
+}
