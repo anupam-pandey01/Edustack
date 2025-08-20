@@ -15,14 +15,14 @@
 }
 .key-benefit-section{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     align-items: center;
-    justify-content: space-between;
-    gap: 50px;
+    justify-content: center;
+    gap: 30px;
     margin-top: 18px;
 }
 .key-benefit{
-    max-width: 450px;
+    /* max-width: 450px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,9 +37,11 @@
     width: 90px;
 }
 .key-benefit-section .key-benefit h2{
+    text-align: center;
     color: #282828;
 }
 .key-benefit-section .key-benefit p{
+    text-align: center;
     font-size: 13px;
     color: #5b5b5b;
 }

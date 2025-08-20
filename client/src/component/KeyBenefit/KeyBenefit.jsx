@@ -28,6 +28,7 @@ const KeyBenefit = () => {
             <h2>Learn Anytime, Anywhere</h2>
             <p>Study on any device, at own place</p>
         </div>
+        
         </div>
     </div>
   )
