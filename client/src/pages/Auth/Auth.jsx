@@ -3,6 +3,8 @@ import "./Auth.css"
 import { useNavigate } from "react-router"
 import signupHandleSubmit from '../../utils/signupHandle';
 import loginHandleSubmit from '../../utils/loginHandle';
+import { useAuth } from '../../AuthContext';
+
 
 const Auth = () => {
   const [authState, setAuthState] = useState("Sign up");
@@ -13,6 +15,7 @@ const Auth = () => {
     role: "student"
   });
 
+  const { setCurrentUser, setIsLoggedIn } = useAuth();
 
   const navigate = useNavigate();
   
@@ -29,9 +32,12 @@ const Auth = () => {
   async function handleSubmit(e){
     // Sign up state
     if(authState === "Sign up"){
-      const {success, message} = await signupHandleSubmit(e, authData);
+      const {success, message, token, userId} = await signupHandleSubmit(e, authData);
       if(success){
         console.log(message);
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", userId);
+        setIsLoggedIn(true);
         navigate("/");
       }else{
         console.log(message);
@@ -41,10 +47,12 @@ const Auth = () => {
 
     // Login State
     if(authState === "Login"){
-      const {success, message} = await loginHandleSubmit(e, authData); 
+      const {success, message, token, userId} = await loginHandleSubmit(e, authData); 
       if(success){
-        console.log(message);
-        alert(message)
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", userId);
+        setIsLoggedIn(true);
+        alert(message);
         navigate("/");
       }else{
         console.log(message);

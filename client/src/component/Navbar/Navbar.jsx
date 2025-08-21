@@ -2,9 +2,20 @@ import React from 'react'
 import "./Navbar.css"
 import logo from "../../assets/logo.svg"
 import { Link, useNavigate } from 'react-router'
+import userIcon from "../../assets/userIcon.png"
+import { useAuth } from '../../AuthContext'
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { isLoggedIn, setCurrentUser, setIsLoggedIn} = useAuth();
+
+  function handleLogout(){
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+  }
+
   function handleButton(){
     navigate("/auth")
   }
@@ -14,7 +25,22 @@ const Navbar = () => {
         <img src={logo} alt="" className='logo'/>
         <span>EduStack</span>
       </Link>
-      <button onClick={handleButton}>Create a account</button>
+      
+      { isLoggedIn ? 
+        <div className="navbar-profile">
+          <p>Be a Instructor</p> 
+          <p>||</p>
+          <p>My Enrollments</p>
+          <div >
+            <img src={userIcon} alt="icon" className='user-logo' />
+            <div className="dropdown">
+              <p onClick={ handleLogout }>Log out</p>
+            </div>
+          </div>
+          
+        </div>
+
+      : <button onClick={handleButton}>Create a account</button> }
     </div>
   )
 }

@@ -24,6 +24,39 @@
 .logo{
     width: 40px;
 }
+.navbar-profile{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.user-logo{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #c5c5c5;
+    border-radius: 50%;
+}
+.navbar-profile .dropdown{
+    position: absolute;
+    top: 80%;
+    right: 4%;
+    z-index: 1;
+    width: fit-content;
+    background-color: #000000b3;
+    color: white;
+    padding: 4px 6px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    display: none;
+}
+.navbar-profile div:hover .dropdown{
+    display: inline;
+}
+.user-icon p{
+    font-size: 14px;
+    color: #1c1c1c;
+    cursor: pointer;
+}
 .navbar button{
     border: none;
     background-color: #0e4af0;
