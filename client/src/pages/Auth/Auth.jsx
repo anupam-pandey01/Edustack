@@ -4,6 +4,8 @@ import { useNavigate } from "react-router"
 import signupHandleSubmit from '../../utils/signupHandle';
 import loginHandleSubmit from '../../utils/loginHandle';
 import { useAuth } from '../../AuthContext';
+import { ToastContainer } from "react-toastify"
+import { handleError, handleSuccess } from '../../utils/handler';
 
 
 const Auth = () => {
@@ -34,14 +36,16 @@ const Auth = () => {
     if(authState === "Sign up"){
       const {success, message, token, userId} = await signupHandleSubmit(e, authData);
       if(success){
-        console.log(message);
         localStorage.setItem("token", token);
         localStorage.setItem("userId", userId);
         setIsLoggedIn(true);
+        setTimeout(()=>{
+          handleSuccess(message);
+        }, 2000)
         navigate("/");
       }else{
+        handleError(message);
         console.log(message);
-        alert(message)
       }
     }
 
@@ -52,11 +56,14 @@ const Auth = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("userId", userId);
         setIsLoggedIn(true);
-        alert(message);
-        navigate("/");
+        handleSuccess(message);
+        setTimeout(()=>{
+          navigate("/");
+        }, 2000)
+        
       }else{
+        handleError(message);
         console.log(message);
-        alert(message)
       }
     }
   }
@@ -85,9 +92,9 @@ const Auth = () => {
         {authState === "Sign up"?
           <p className='form-footer'>Already have account <span onClick={()=>setAuthState("Login")}>Login</span></p>:
           <p className='form-footer'>Create new account <span onClick={()=>setAuthState("Sign up")}>Sign up</span></p>
-        }
-        
+        }  
       </form>
+     < ToastContainer />
     </div>
   )
 }

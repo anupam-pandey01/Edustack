@@ -105,7 +105,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <Link ><span className='call-to-action-button'>Show all Courses</span></Link>
+        <Link className='call-to-action-button'><span>Show all Courses</span></Link>
       </div>
       <Testimonial/>
     </div>
