@@ -1,0 +1,65 @@
+.mycourse h1{
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+.mycourse-section{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.mycourse-card{
+    border: 1px solid  #dbdada;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fffefe;
+    box-shadow: rgba(139, 141, 142, 0.2) 0px 8px 24px;
+}
+.mycourse-card img{
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+.card-body{
+    padding: 0 8px;
+    padding-bottom: 14px;
+}
+.card-body .card-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+}
+.card-body i{
+    font-size: 13px;
+    font-weight: 400;
+}
+.card-body .card-author{
+    font-size: 14px;
+}
+.card-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.card-footer .edit-button{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    background-color: rgb(14, 14, 242);
+    cursor: pointer;
+}
+.card-footer .delete-button{
+    padding: 4px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    background-color: rgb(235, 12, 42);
+    cursor: pointer;
+}

@@ -14,6 +14,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    courses: {
+        type: Schema.Types.ObjectId,
+        ref: "Course"
+    },
     role:{
         type: String,
         enum: ['instructor', 'student']

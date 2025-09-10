@@ -5,7 +5,10 @@
     try{
       let { email, password } = authData;
       if(!email || !password){
-        alert("email, password are required");
+        return {
+          success: false,
+          message: "email, password are required"
+        }
       }
       let url = "http://localhost:5000/login";
       let response = await fetch(url, {
@@ -20,7 +23,10 @@
         return data;
       }
     }catch(err){
-      console.log(err)
+      return {
+        success: false,
+        message: "Server Error"
+      }
     }
   }
 

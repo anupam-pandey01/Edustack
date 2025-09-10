@@ -1,0 +1,21 @@
+.educator-dashboard{
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scrollbar-gutter: 0;
+}
+.educator-dashboard-large{
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+.educator-dashboard-large main{
+    margin: 40px 100px;
+}
+.educator-dashboard main{
+    margin: 40px 100px;
+}

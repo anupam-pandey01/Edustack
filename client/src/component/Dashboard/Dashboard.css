@@ -1,0 +1,142 @@
+.dashboard{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 60px;
+    overflow-y: scroll;
+}
+
+.dashboard-info{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 80px;
+    /* margin-bottom: 60px; */
+}
+.dashborad-card img{
+    width: 55px;
+    background-color: #0d00ff0c;
+    padding: 5px;
+    border-radius: 5px;
+}
+.dashborad-card {
+    display: flex;
+    gap: 30px;
+    width: 320px;
+    border-radius: 5px;
+    border: 1px solid;
+    padding: 20px 40px;
+    border: 1px solid #dbdada;
+    border-radius: 10px;
+    background-color: #fffefe;
+}
+.data .number{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
+.table-section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  /* box-shadow: 0 4px 10px rgba(0,0,0,0.1); */
+  border: 1px solid #dbdada;
+  margin-right: 30px;
+}
+
+.table-section h2 {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* .table-wrapper {
+  overflow-x: auto; Make table scrollable on mobile
+} */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px; /* prevents columns from squishing too much */
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+tr:hover {
+  background: #f9fafb;
+}
+
+.status.enrolled {
+  color: #16a34a;
+  font-weight: 600;
+}
+/* 
+.dashboard-info{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 80px;
+    margin-bottom: 60px;
+}
+.dashborad-card img{
+    width: 55px;
+    background-color: #0d00ff0c;
+    padding: 5px;
+    border-radius: 5px;
+}
+.dashborad-card {
+    display: flex;
+    gap: 30px;
+    width: 320px;
+    border-radius: 5px;
+    border: 1px solid;
+    padding: 20px 40px;
+    border: 1px solid #dbdada;
+    border-radius: 10px;
+    background-color: #fffefe;
+}
+.data .number{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
+.recent-enrolled h1{
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+.enrolled-student{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dbdada;
+    margin-right: 500px;
+    border-radius: 10px;
+}
+.enrolled-student .student-info{
+    display: flex;
+    gap: 150px;
+    padding: 10px 5px;
+    border-bottom: 1px solid  #dbdada;
+}
+.enrolled-student .student-info:last-child{
+    border: none;
+}
+.student-info img{
+    width: 30px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+.student-info .student{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+} */

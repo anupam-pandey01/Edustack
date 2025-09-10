@@ -1,0 +1,55 @@
+.add-course{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-right: 40px;
+}
+.add-course h1{
+    font-size: 30px;
+}
+.course-input{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.course-input input{
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border: 1px solid black;
+    font-size: 16px;
+    border-radius: 5px;
+}
+.upload-thumbnail input{
+    border: none;
+}
+.upload-thumbnail label{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid black;
+    width: fit-content;
+    padding: 2px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #cacaca;
+}
+.course-input textarea{
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border: 1px solid black;
+    font-size: 16px;
+    border-radius: 5px;
+}
+.add-course button{
+    width: fit-content;
+    margin-left: auto;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: none;
+    color: #fff;
+    background-color: #0e4af0;
+    border-radius: 5px;
+    cursor: pointer;
+}
