@@ -7,7 +7,7 @@ import { useAuth } from '../../AuthContext'
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, setCurrentUser, setIsLoggedIn} = useAuth();
+  const { currentUser, isLoggedIn, setCurrentUser, setIsLoggedIn} = useAuth();
 
   function handleLogout(){
     setIsLoggedIn(false);
@@ -28,7 +28,7 @@ const Navbar = () => {
       
       { isLoggedIn ? 
         <div className="navbar-profile">
-          <p>Be a Instructor</p> 
+          <Link to={`educator/${currentUser}`}>Be a Instructor</Link> 
           <p>||</p>
           <p>My Enrollments</p>
           <div >

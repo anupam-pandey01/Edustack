@@ -43,7 +43,6 @@ async function registerUser(req, res){
 async function loginUser(req, res){
     try{
         const {email, password} = req.body;
-
         const user = await User.findOne({email});
         if(!user){
             return res.status(404).json({ success: false, message: "Invalid username or password" }) 
@@ -65,6 +64,7 @@ async function loginUser(req, res){
         }
         
     }catch(err){
+        console.log(err)
         res.status(500).json({
             success: false,
             message: "Server Error"

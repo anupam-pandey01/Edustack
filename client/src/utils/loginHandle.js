@@ -1,4 +1,4 @@
-// Function that's handle the submit of Sign up form after click on submit button
+// Function that's handle the submit of login form after click on submit button
 
  async function loginHandleSubmit(e, authData){
     e.preventDefault();
@@ -10,7 +10,7 @@
           message: "email, password are required"
         }
       }
-      let url = "http://localhost:5000/login";
+      let url = `${import.meta.env.VITE_BASE_URL}/login`;
       let response = await fetch(url, {
         method: "POST",
         headers:{
@@ -23,6 +23,7 @@
         return data;
       }
     }catch(err){
+      console.log(err)
       return {
         success: false,
         message: "Server Error"

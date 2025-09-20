@@ -4,7 +4,7 @@ const { Schema } = require("mongoose");
 
 // Lesson Schema
 const lessonSchema = new Schema({
-    title: {
+    lessonTitle: {
         type: String,
         required: true
     },
@@ -12,48 +12,44 @@ const lessonSchema = new Schema({
         type: String,
         required: true
     },
-    videourl: {
-        type: String,
-    },
-    resource: {
-        type: String
-    }
 });
 
 
 // Chapter Schema
 const chapterSchema = new Schema({
-    title: {
+    chapterTitle: {
         type: String,
-        require: true
     },
-    
     lessons: [ lessonSchema ]
 });
 
+
 // Course Schema
 const courseSchema = new Schema({
-    title: {
+    courseTitle: {
         type: String,
         required: true
     },
-    description: {
+    courseDescription: {
         type: String,
         required: true
     },
-    image: {
+    courseThumbnail: {
         type: String,
-        required: true,
     },
     createdBy: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: true
     },
     createdAt: {
-
+        type: Date, 
+        default: Date.now
     },
     chapters: [ chapterSchema ]
 });
 
 
 const Course = mongoose.model("Course", courseSchema);
+
+module.exports = Course;

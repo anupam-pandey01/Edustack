@@ -10,7 +10,7 @@
           message: "username, email, password are required"
         }
       }
-      let url = "http://localhost:5000/register";
+      let url = `${import.meta.env.VITE_BASE_URL}/register`
       let response = await fetch(url, {
         method: "POST",
         headers:{
@@ -23,6 +23,7 @@
         return data;
       }
     }catch(err){
+      console.log(err)
       return {
         success: false,
         message: "Server Error"
