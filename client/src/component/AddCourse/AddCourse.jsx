@@ -9,8 +9,6 @@ const AddCourse = ({ setMenu }) => {
   const [courseTitle, setCourseTitle] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [courseImage, setCourseImage] = useState(null);
- 
-  const navigate = useNavigate();
 
   // Handle Form Data
   const handleFormData = async (e)=>{
@@ -32,11 +30,8 @@ const AddCourse = ({ setMenu }) => {
       },
       body: formData
     })
-
-    // Reseting the inputs
-    setCourseTitle("")
-    setCourseDescription("")
-    let data = await response.json()
+    // Redirect to my course section
+    setMenu("mycourse")
   }
   return (
     <form className='add-course' onSubmit={handleFormData}>
