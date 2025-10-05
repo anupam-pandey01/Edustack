@@ -9,11 +9,12 @@ const AddCourse = ({ setMenu }) => {
   const [courseTitle, setCourseTitle] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [courseImage, setCourseImage] = useState(null);
+  const [isloading, setIsLoading] = useState(false);
 
   // Handle Form Data
   const handleFormData = async (e)=>{
     e.preventDefault();
-  
+    setIsLoading(true)
     // We use here formData for multipart/formdata
     const formData = new FormData()
     formData.append("courseTitle", courseTitle)

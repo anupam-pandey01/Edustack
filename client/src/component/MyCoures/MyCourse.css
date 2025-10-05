@@ -1,65 +1,145 @@
+/* Course Section */
 .mycourse h1{
     font-size: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
-.mycourse-section{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+.mycourse-container{
+    border: 1px solid #dbdada;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+.mycourse-card{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #dbdada;
+    padding: 5px 10px;
+    /* margin-bottom: 10px; */
+}
+.mycourse-card-left img{
+    width: 100px;
+    border-radius: 5px;
+}
+.mycourse-card-left{
+    display: flex;
     gap: 20px;
 }
-
-.mycourse-card{
-    border: 1px solid  #dbdada;
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #fffefe;
-    box-shadow: rgba(139, 141, 142, 0.2) 0px 8px 24px;
-}
-.mycourse-card img{
-    width: 100%;
-    aspect-ratio: 16/9;
-}
-.card-body{
-    padding: 0 8px;
-    padding-bottom: 14px;
-}
-.card-body .card-title{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.mycourse-card-left .course-title{
     font-weight: 500;
 }
-.card-body i{
+.mycourse-card-left .date{
     font-size: 13px;
-    font-weight: 400;
 }
-.card-body .card-author{
-    font-size: 14px;
+
+.my-course-card-right button{
+    margin-left: 20px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
-.card-footer{
+.my-course-card-right .delete{
+    background-color: rgb(244, 59, 59);
+}
+.my-course-card-right .edit{
+    background-color: #0e4af0;
+}
+.my-course-card-right .accordion{
+    background: none;
+}
+
+
+/* Course Chapter Section */
+.course-chapter{
+    display: none;
+}
+.chapter-info{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20px;
+    padding: 10px 60px;
+    border-bottom: 1px solid #dbdada;
+    border-top: 1px solid #dbdada;
+    background-color: #e6e4e4;
 }
-.card-footer .edit-button{
+.chapter-info .s-no{
+    margin-right: 10px;
+}
+.chapter-info button{
+    background: none;
+    border: none;
+}
+
+/* Show Chapter Dropdown */
+.course-chapter-expand{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Course Chapter Lesson */
+.course-lesson{
+    margin: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    cursor: pointer;
+}
+.course-lesson .lesson{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dbdada;
+    padding-bottom: 3px;
+}
+.course-lesson .lesson-btn{
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 4px 16px;
-    font-size: 14px;
-    border: none;
-    border-radius: 3px;
-    color: #fff;
-    background-color: rgb(14, 14, 242);
-    cursor: pointer;
+    gap: 30px;
 }
-.card-footer .delete-button{
-    padding: 4px 16px;
-    font-size: 14px;
+.lesson-btn button{
+    padding: 5px 10px;
+    border-radius: 5px;
     border: none;
-    border-radius: 3px;
+    /* border: 1px solid #dbdada; */
+}
+.lesson-btn .delete{
+    background-color: #dbdada;
+    color: #000;
+}
+.lesson-btn .update{
+    background-color: #000;
     color: #fff;
-    background-color: rgb(235, 12, 42);
-    cursor: pointer;
+}
+.course-lesson .add-lesson{
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 30px;
+    align-items: center;
+    margin-top: 20px;
+}
+.course-lesson .add-lesson input{
+    width: 50%;
+    padding: 10px 20px;
+    font-weight: 400;
+    font-size: 16px;
+    border: none;
+    border: 1px solid #dbdada;
+    border-radius: 5px;
+    outline: none;
+}
+.course-lesson .add-lesson button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Show Course Lesson */
+.course-lesson-hide{
+    display: none;
 }
