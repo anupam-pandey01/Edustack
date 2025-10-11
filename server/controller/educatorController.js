@@ -50,10 +50,11 @@ const addChapter = async (req, res)=>{
       return
     }
     
-    course.chapters.push({ chapterTitle })
-    const addNewChapter = await course.save()
+    course.chapters.push({ chapterTitle });
+    await course.save();
+    const updatedCourse = await  Course.find({createdBy: course.createdBy});
 
-    res.status(201).json({message: "New Chapter Added", success: true, course: addNewChapter});
+    res.status(201).json({ message: "New Chapter Added", success: true, course: updatedCourse });
 
   }catch(err){
     console.log("Error during the adding chapter", err);
@@ -65,8 +66,10 @@ const addChapter = async (req, res)=>{
 const addLesson = async (req, res)=>{
   const { chapterTitle } = req.query;
   const { courseId } = req.params;
+  const { userId } = req.params;
   const { lessonTitle } = req.body;
   
+  console.log(userId)
   if(!lessonTitle){
     res.status(400).json({message: "Lesson title is required", success: false});
     return
@@ -94,11 +97,11 @@ const addLesson = async (req, res)=>{
     // console.log(course)
     // console.log(course.chapters[1].lessons)
     const addNewLesson = await course.save();
-
+    const updatedCourse = await Course.find({createdBy: userId});
     res.status(201).json({
       message: "Lesson added successfully to chapter.",
       success: true,
-      course: addNewLesson,
+      course: updatedCourse,
     })
   }catch(err){
     console.log("Error during adding lesson", err);

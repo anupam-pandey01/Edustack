@@ -105,7 +105,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <Link className='call-to-action-button'><span>Show all Courses</span></Link>
+        <Link to={"/course/list"} className='call-to-action-button'><span>Show all Courses</span></Link>
       </div>
       <Testimonial/>
     </div>

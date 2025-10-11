@@ -11,6 +11,7 @@ const Educator = () => {
   const [menu, setMenu] = useState("dashboard");
   const [open, setOpen] = useState(true);
   const {userId} = useParams();
+  const {courseId} = useParams();
 
   return (
     <div className={open?'educator-dashboard':"educator-dashboard-large"}>
@@ -18,7 +19,7 @@ const Educator = () => {
       <main>
         {menu=="dashboard" &&  <Dashboard/>}
         {menu=="addcourse" &&  <AddCourse setMenu={setMenu}/>}
-        {menu=="mycourse" && <MyCourse menu={menu} userId={userId}/>}
+        {menu=="mycourse" && <MyCourse menu={menu} userId={userId} courseId={courseId}/>}
         {menu=="enrolledstudent" && <EnrolledStudent />}
       </main>
     </div>

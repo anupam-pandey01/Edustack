@@ -10,6 +10,6 @@ const auth = require("../Middleware/Auth");
 educatorRouter.post("/uploadsCourseData", auth, upload.single("courseImage"), uploadCourseData);
 educatorRouter.get("/getCourseData/:userId", getCourseData);
 educatorRouter.post("/chapter/new/:courseId", addChapter);
-educatorRouter.post("/lesson/new/:courseId", addLesson)
+educatorRouter.post("/lesson/new/:userId/:courseId", addLesson)
 
 module.exports = educatorRouter

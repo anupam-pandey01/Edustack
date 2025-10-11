@@ -8,7 +8,7 @@ const Hero = () => {
         <h1>Learn Without Limits</h1>
         <h1>100% Free Courses for Everyone</h1>
         <p>Access quality lessons, quizzes, and resources at no cost. start learning today and build your future</p>
-        <Link ><button className="search-button">Explore now</button></Link>
+        <Link to={"/course/list"}><button className="search-button">Explore now</button></Link>
       </div>
       <div className='input-section' >
         <input type="text" placeholder='Enter the course name' name='course' />

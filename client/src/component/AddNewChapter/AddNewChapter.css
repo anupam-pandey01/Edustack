@@ -1,0 +1,44 @@
+
+.addnewchapter{
+    border: 1px solid #dbdada;
+    width: 400px;
+    height: 200px;
+    padding: 30px 20px;
+    border-radius: 5px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+.chapter-header{
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.chapter-input{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.chapter-input button{
+    width: fit-content;
+    font-size:14px;
+    padding: 4px 10px;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.chapter-input input{
+    padding: 5px 10px;
+    border: none;
+    border: 1px solid #dbdada;
+    outline: none;
+    font-size: 15px;
+    border-radius:2px ;    
+}
