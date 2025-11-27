@@ -57,7 +57,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 500px; /* prevents columns from squishing too much */
+  /* min-width: 500px; prevents columns from squishing too much */
 }
 
 th, td {
@@ -78,6 +78,24 @@ tr:hover {
 .status.enrolled {
   color: #16a34a;
   font-weight: 600;
+}
+
+@media(max-width: 580px){
+  .table-section {
+    background: white;
+    padding: 20px 5px;
+    border-radius: 12px;
+    /* box-shadow: 0 4px 10px rgba(0,0,0,0.1); */
+    border: 1px solid #dbdada;
+    margin-right: 0px;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+  }
 }
 /* 
 .dashboard-info{

@@ -1,16 +1,16 @@
 import React from 'react'
 import "./Footer.css"
 import logo from "../../assets/logo.svg"
-
+import { Link } from 'react-router'
 
 const Footer = () => {
   return (
     <div className='footer'>
       <div className="logo-section">
-        <div>
+        <Link to={`/`} className='footer-logo'>
             <img src={logo} alt="" />
             <h1>EduStack</h1>
-        </div>
+        </Link>
         <p>EduStack is a free learning platform built to empower students, professionals, and lifelong learners. With interactive courses, a supportive community, and easy access to resources, EduStack makes quality education accessible to everyone—anytime, anywhere.</p>
       </div>
       <div className="about-platform">

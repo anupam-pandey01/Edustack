@@ -1,6 +1,7 @@
 const Course = require("../model/course.js");
 const cloudinary = require("../config/cloudinaryConfig.js");
 
+
 // Upload Course Data to cloud DB
 const uploadCourseData = async (req, res) => {
   try {
@@ -15,7 +16,7 @@ const uploadCourseData = async (req, res) => {
     const newCourse = new Course({
       courseTitle,
       courseDescription,
-      courseThumbnail: cldRes.public_id,
+      courseThumbnail: cldRes.secure_url,
       createdBy: req.user.id
     })
 
@@ -31,6 +32,7 @@ const uploadCourseData = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 // Controller to Add Chapter in the course
 const addChapter = async (req, res)=>{
@@ -69,7 +71,7 @@ const addLesson = async (req, res)=>{
   const { userId } = req.params;
   const { lessonTitle } = req.body;
   
-  console.log(userId)
+
   if(!lessonTitle){
     res.status(400).json({message: "Lesson title is required", success: false});
     return
@@ -94,8 +96,6 @@ const addLesson = async (req, res)=>{
     }
 
     chapter.lessons.push({ lessonTitle });
-    // console.log(course)
-    // console.log(course.chapters[1].lessons)
     const addNewLesson = await course.save();
     const updatedCourse = await Course.find({createdBy: userId});
     res.status(201).json({
@@ -125,10 +125,95 @@ const getCourseData = async (req, res)=>{
   }
 }
 
+const fecthLessonContent = async(req, res)=>{
+  const {courseId} = req.params;
+  const {chapterTitle} = req.query;
+  const {lessonId} = req.params;
+  
+  try{
+    const course = Course.findById({_id: courseId});
+
+    if(!course){
+      res.status(404).json({message: "Course Not Found", success: false})
+      return
+    }
+
+    const chapter = course.chapters.find(
+      (chapter)=> chapter.chapterTitle === chapterTitle
+    )
+
+    if(!chapter){
+      res.status(404).json({message: "chapter Not Found", success: false})
+      return
+    }
+
+    const lesson = chapter.lessons.find(
+      (lesson)=> lesson._id == lessonId
+    )
+
+    if(!lesson){
+      res.status(404).json({message: "Lesson Not Found", success: false})
+      return
+    }
+
+    const html = lesson.content
+    res.status(200).json({html})
+  }catch(err){
+    console.log("Error during fetching lesson content", err);
+    res.status(500).json({message: "Server error", success: false})
+  }
+}
+
+
+
+// Controller for the lesson content to save html in the db 
+const saveLessonContent = async (req, res)=>{
+  const { courseId } = req.params;
+  const {chapterTitle} = req.query;
+  const { lessonId } = req.params;
+  const { html } = req.body; 
+  try{
+    const course = await Course.findById({_id: courseId});
+
+    if(!course){
+      res.status(404).json({message: "Course Not Found", success: false})
+      return
+    }
+  
+   
+    const chapter = course.chapters.find(
+      (chap)=> chap.chapterTitle === chapterTitle
+    );
+    
+
+    if(!chapter){
+      res.status(404).json({message: "chapter Not Found", success: false})
+      return
+    }
+
+    const lesson = chapter.lessons.find(
+      (lesson)=> lesson._id == lessonId
+    );
+   
+    if(!lesson){
+      res.status(404).json({message: "Lesson Not Found", success: false})
+      return
+    }
+
+    lesson.content = html
+    await course.save()
+    res.status(200).json({message: "Updated Successfully", success: true, course})
+  }catch(err){
+    console.log(err);
+    res.status(500).json({message: "Server Error", success: false})
+  }
+}
 
 module.exports = { 
     uploadCourseData, 
     getCourseData, 
     addChapter, 
-    addLesson 
+    addLesson,
+    saveLessonContent , 
+    fecthLessonContent
   }

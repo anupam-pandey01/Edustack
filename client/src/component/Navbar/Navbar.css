@@ -10,6 +10,10 @@
     border-bottom: #c5c5c5;
 }
 
+.mobile-humburger{
+    display: none;
+}
+
 .brand{
     display: flex;
     justify-content: center;
@@ -20,7 +24,16 @@
     cursor: pointer;
     color: black;
 }
-
+.brand-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    color: black;
+}
 .logo{
     width: 40px;
 }
@@ -34,23 +47,38 @@
     height: 40px;
     border: 1px solid #c5c5c5;
     border-radius: 50%;
+    cursor: pointer;
 }
 .navbar-profile .dropdown{
     position: absolute;
-    top: 80%;
-    right: 4%;
+    top: 60px;
+    right: 4px;
     z-index: 1;
     width: fit-content;
-    background-color: #000000b3;
-    color: white;
-    padding: 4px 6px;
+    background-color: #fffefe;
+    box-shadow: rgba(139, 141, 142, 0.2) 0px 8px 24px;
+    border: 1px solid #dbdada;
+    color: black;
+    /* padding: 10px 26px; */
     border-radius: 5px;
     font-size: 14px;
-    cursor: pointer;
     display: none;
 }
 .navbar-profile div:hover .dropdown{
     display: inline;
+}
+.navbar-profile div p{
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 10px 26px;
+    border-bottom: 1px solid #dbdada;
+}
+.navbar-profile div p:last-child{
+    border-bottom: none;
+}
+.navbar-profile div p:hover{
+    background-color: #7e9df143;
 }
 .user-icon p{
     font-size: 14px;
@@ -64,4 +92,21 @@
     border-radius: 20px;
     padding: 4px 10px;
     cursor: pointer;
+}
+
+@media(max-width: 380px){
+    .navbar-profile div p{
+        font-size: 15px;
+        font-weight: 400;
+        cursor: pointer;
+        padding: 8px 10px;
+        border-bottom: 1px solid #dbdada;
+    }
+}
+
+@media(max-width: 1240px){
+    .mobile-humburger{
+        display: inline;
+        margin-top: 5px;
+    }
 }

@@ -12,7 +12,7 @@ import { IoMdAdd } from "react-icons/io"
 import AddNewChapter from '../AddNewChapter/AddNewChapter'
 
 
-const MyCourse = ({userId, courseId}) => {
+const MyCourse = ({userId, courseId, setMenu}) => {
   const [courseData, setCourseData] = useState([]);
   const [isloading, setIsLoading] = useState(true);
   const [selected, setSelected] = useState(null);
@@ -87,7 +87,7 @@ const MyCourse = ({userId, courseId}) => {
             <div  className='mycourse-container' key={course._id}>
               <div className="mycourse-card">
                 <div className='mycourse-card-left'>
-                  <img src={thumbnail1} alt="" />
+                  <img src={course.courseThumbnail} alt="" />
                   <div className='mycourse-card-body'>
                     <p className='course-title'>{course.courseTitle}</p>
                     <p className='date'>
@@ -125,7 +125,7 @@ const MyCourse = ({userId, courseId}) => {
                         <div className="lesson" key={lesson._id}>
                           <p>{lesson.lessonTitle}</p>
                           <div className='lesson-btn'>
-                            <button className="update">Update</button> 
+                            <Link to={`/educator/${userId}/c/${course._id}/${lesson._id}?chapterTitle=${chapter.chapterTitle}`}> <button className="update" onClick={()=> setMenu("texteditor")}>Update</button> </Link>
                             <button className="delete">Delete</button>
                           </div>
                         </div>

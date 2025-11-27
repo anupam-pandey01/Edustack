@@ -44,3 +44,45 @@
     font-size: 14px;
     font-weight: 430;
 }
+
+@media(max-width: 1240px){
+    #sidebar{
+        display: none;
+    }
+    .mobile-side-bar{
+        position: absolute;
+        width: 280px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: 0.3s, ease-out;
+        left: 0;border-right: 1px solid #dcdcdc;
+        background-color: #faf7f7;
+    }
+    .sidebar-closer{
+        align-self: flex-end;
+        margin: 10px;
+    }
+}
+
+@media(max-width: 530px){
+    .sidebar-brand{
+        padding: 15px 10%;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        cursor: pointer;
+    }
+    .mobile-side-bar{
+        position: absolute;
+        width: 240px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: 0.3s, ease-out;
+        left: 0;border-right: 1px solid #dcdcdc;
+        background-color: #faf7f7;
+    }
+}

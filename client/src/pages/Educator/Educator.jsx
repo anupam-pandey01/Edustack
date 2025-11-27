@@ -6,6 +6,7 @@ import AddCourse from '../../component/AddCourse/AddCourse';
 import MyCourse from '../../component/MyCoures/MyCourse';
 import EnrolledStudent from '../../component/EnrolledStudent/EnrolledStudent';
 import { Link, useParams } from 'react-router';
+import TextEditor from '../../component/TextEditor/TextEditor';
 
 const Educator = () => {
   const [menu, setMenu] = useState("dashboard");
@@ -13,14 +14,20 @@ const Educator = () => {
   const {userId} = useParams();
   const {courseId} = useParams();
 
+  const onChange = (e)=>{
+    e.preventDefault();
+    setLessonContent(e.target.value)
+  }
+
   return (
     <div className={open?'educator-dashboard':"educator-dashboard-large"}>
-      <Sidebar setMenu={setMenu} setOpen={setOpen} open={open}/>
+      <Sidebar setMenu={setMenu} setOpen={setOpen} open={open} userId={userId}/>
       <main>
         {menu=="dashboard" &&  <Dashboard/>}
         {menu=="addcourse" &&  <AddCourse setMenu={setMenu}/>}
-        {menu=="mycourse" && <MyCourse menu={menu} userId={userId} courseId={courseId}/>}
+        {menu=="mycourse" && <MyCourse menu={menu} userId={userId} courseId={courseId} setMenu={setMenu}/>}
         {menu=="enrolledstudent" && <EnrolledStudent />}
+        {menu=="texteditor" && <TextEditor />}
       </main>
     </div>
   )

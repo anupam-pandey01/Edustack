@@ -1,0 +1,59 @@
+.course-description{
+    display: flex;
+    padding: 0 5%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.course-info{
+    flex: 1;
+}
+.course-enrolled-card{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 300px;
+    height: 330px;
+    margin-left: 20px;
+    border: 1px solid #dbdada;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.course-enrolled-card img{
+    width: 100%;
+}
+.enrolled-card-title{
+    font-size: 17px;
+    font-weight: 500;
+    padding: 5px;
+}
+.enrolled-card-info{
+    display: flex;
+    padding: 14px;
+    font-size: 14px;
+    justify-content: space-between;
+}
+.enrolled-card-label{
+    font-size: 13px;
+    background-color: #04b338;
+    padding: 0 5px;
+    color: white;
+    border-radius: 3px;
+}
+.enrolled-card-chapter{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.enrolled-card-lesson{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.enrolled-card-button{
+    border: none;
+    padding: 6px 12px;
+    margin: 10px 5px;
+    margin-top: 20px;
+    background-color: #0e4af0;
+    color: white;
+}

@@ -19,3 +19,18 @@
 .educator-dashboard main{
     margin: 40px 100px;
 }
+
+@media(max-width: 1240px){
+    .educator-dashboard{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .educator-dashboard main{
+        margin: 40px 50px;
+    }
+}
+@media(max-width: 630px){
+    .educator-dashboard main{
+        margin: 40px 10px;
+    }
+}

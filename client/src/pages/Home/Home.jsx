@@ -1,17 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Home.css"
-import { Rating } from "react-simple-star-rating"
 import Hero from '../../component/Hero/Hero'
 import KeyBenefit from '../../component/KeyBenefit/KeyBenefit'
-import thumbnail1 from "../../assets/thumbnail1.png"
 import thumbnail2 from "../../assets/thumbnail2.jpg"
 import thumbnail3 from "../../assets/thumbnail3.png"
 import thumbnail4 from "../../assets/thumbnail4.png"
 import Testimonial from '../../component/Testimonial/Testimonial'
 import { Link } from 'react-router'
+import CourseCard from '../../component/CourseCard/CourseCard'
 const Home = () => {
   const [rating, setRating] = useState(1);
+  const [courseData, setCourseData] = useState([]);
   
+  useEffect(()=>{
+    const getCourseData = async ()=>{
+      try{
+        const url = `${import.meta.env.VITE_BASE_URL}/course/list`
+        const res = await fetch(url, {
+          method: "GET", 
+        });
+  
+        const data = await res.json()
+  
+        setCourseData(data.course.slice(0, 4))
+      }catch(err){
+        console.log("Client Error: Course Data fetching failed",err)
+      }
+      
+    }
+  
+    getCourseData()
+  }, [])
 
   return (
     <div className='home'>
@@ -21,92 +40,16 @@ const Home = () => {
         <h1>Learn From Best</h1>
         <p className='subheading'>Start your journey with the courses learners love the most.</p>
         <div className="course">
-          <div className="course-card">
-            <img src={thumbnail1} alt="thumbnail-image" />
-            <div>
-              <p className='card-title'>Learn DSA in java</p>
-              <p className='card-owner'>Mohit Kumar</p>
-              <div className="star-section">
-                <span className='avg-rating'>5</span> 
-                <span className='rating-star'>
-                  <Rating
-                    readonly={true}
-                    size={20}
-                    allowHover={false}
-                    initialValue={1}
-                  />
-                </span> 
-                <span className='rating-no'>(1)</span>
-              </div>
-              <p className='card-label'>Free</p>
-            </div>
-          </div>
-
-          <div className="course-card">
-            <img src={thumbnail2} alt="thumbnail-image" />
-            <div>
-              <p className='card-title'>Learn DSA in java</p>
-              <p className='card-owner'>Mohit Kumar</p>
-              <div className="star-section">
-                <span className='avg-rating'>5</span> 
-                <span className='rating-star'>
-                  <Rating
-                    readonly={true}
-                    size={20}
-                    allowHover={false}
-                    initialValue={1}
-                  />
-                </span> 
-                <span className='rating-no'>(1)</span>
-              </div>
-              <p className='card-label'>Free</p>
-            </div>
-          </div>
-
-          <div className="course-card">
-            <img src={thumbnail3} alt="thumbnail-image" />
-            <div>
-              <p className='card-title'>Learn DSA in java</p>
-              <p className='card-owner'>Mohit Kumar</p>
-              <div className="star-section">
-                <span className='avg-rating'>5</span> 
-                <span className='rating-star'>
-                  <Rating
-                    readonly={true}
-                    size={20}
-                    allowHover={false}
-                    initialValue={1}
-                  />
-                </span> 
-                <span className='rating-no'>(1)</span>
-              </div>
-              <p className='card-label'>Free</p>
-            </div>
-          </div>
-
-          <div className="course-card">
-            <img src={thumbnail4} alt="thumbnail-image" />
-            <div>
-              <p className='card-title'>Learn DSA in java</p>
-              <p className='card-owner'>Mohit Kumar</p>
-              <div className="star-section">
-                <span className='avg-rating'>5</span> 
-                <span className='rating-star'>
-                  <Rating
-                    readonly={true}
-                    size={20}
-                    allowHover={false}
-                    initialValue={3}
-                  />
-                </span> 
-                <span className='rating-no'>(1)</span>
-              </div>
-              <p className='card-label'>Free</p>
-            </div>
-          </div>
+          {
+            courseData.map((course)=>{
+              return <CourseCard courseTitle={course.courseTitle} courseOwner={course.createdBy.username} createdAt={course.createdAt} courseId={course._id} courseImage={course.courseThumbnail}/>
+            })
+          }
         </div>
-        <Link to={"/course/list"} className='call-to-action-button'><span>Show all Courses</span></Link>
+        <Link to={"/course-list"} className='call-to-action-button'><span>Show all Courses</span></Link>
       </div>
+
+      
       <Testimonial/>
     </div>
   )

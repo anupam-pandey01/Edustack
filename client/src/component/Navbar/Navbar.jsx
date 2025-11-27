@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Navbar.css"
 import logo from "../../assets/logo.svg"
 import { Link, useNavigate } from 'react-router'
 import userIcon from "../../assets/userIcon.png"
 import { useAuth } from '../../AuthContext'
+import { GiHamburgerMenu } from "react-icons/gi";
 
-const Navbar = () => {
+const Navbar = ({isDashboard, setIsDashboard}) => {
   const navigate = useNavigate();
-  const { currentUser, isLoggedIn, setCurrentUser, setIsLoggedIn} = useAuth();
+  const { currentUser, isLoggedIn, setCurrentUser, setIsLoggedIn,  mobileMenu, setmobileMenu } = useAuth();
+  
 
   function handleLogout(){
     setIsLoggedIn(false);
@@ -19,25 +21,28 @@ const Navbar = () => {
   function handleButton(){
     navigate("/auth")
   }
+
+
   return (
     <div className='navbar'>
-      <Link to={"/"} className='brand'>
-        <img src={logo} alt="" className='logo'/>
-        <span>EduStack</span>
-      </Link>
-      
+      <div className='brand-group'>
+        {isDashboard && mobileMenu ? <GiHamburgerMenu size={30} onClick={()=> setmobileMenu(!mobileMenu)} className='mobile-humburger'/>: <></>}
+        <Link to={`/`} className='brand' onClick={()=> setIsDashboard(false)}>
+          <img src={logo} alt="" className='logo'/>
+          <span>EduStack</span>
+        </Link>
+        
+      </div>
       { isLoggedIn ? 
         <div className="navbar-profile">
-          <Link to={`educator/${currentUser}`}>Be a Instructor</Link> 
-          <p>||</p>
-          <p>My Enrollments</p>
-          <div >
+          <div>
             <img src={userIcon} alt="icon" className='user-logo' />
             <div className="dropdown">
-              <p onClick={ handleLogout }>Log out</p>
+              <Link to={`/educator/${currentUser}`}><p className='dropdown-dashboard' onClick={()=> setIsDashboard(true)}>Dashboard</p></Link>
+              <Link to={`/enrollment/${currentUser}`}><p className='dropdown-enroll' >My Enrollment</p></Link>
+              <p onClick={ handleLogout } className='dropdown-logout'>Log out</p>
             </div>
-          </div>
-          
+          </div>   
         </div>
 
       : <button onClick={handleButton}>Create a account</button> }

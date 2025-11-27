@@ -39,6 +39,7 @@ async function registerUser(req, res){
     }
 }
 
+
 // Controller for Login route
 async function loginUser(req, res){
     try{

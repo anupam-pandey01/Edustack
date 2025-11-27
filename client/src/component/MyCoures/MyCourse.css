@@ -9,6 +9,7 @@
     margin-top: 20px;
     background-color: #ffffff;
 }
+
 .mycourse-card{
     width: 100%;
     display: flex;
@@ -18,6 +19,8 @@
     padding: 5px 10px;
     /* margin-bottom: 10px; */
 }
+
+
 .mycourse-card-left img{
     width: 100px;
     border-radius: 5px;
@@ -31,6 +34,13 @@
 }
 .mycourse-card-left .date{
     font-size: 13px;
+}
+
+.my-course-card-right{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .my-course-card-right button{
@@ -66,6 +76,8 @@
 }
 .chapter-info .s-no{
     margin-right: 10px;
+    font-weight: 500;
+    font-size: 17px;
 }
 .chapter-info button{
     background: none;
@@ -108,10 +120,12 @@
 .lesson-btn .delete{
     background-color: #dbdada;
     color: #000;
+    cursor: pointer;
 }
 .lesson-btn .update{
     background-color: #000;
     color: #fff;
+    cursor: pointer;
 }
 .course-lesson .add-lesson{
     display: flex;
@@ -142,4 +156,77 @@
 /* Show Course Lesson */
 .course-lesson-hide{
     display: none;
+}
+
+@media(max-width: 885px){
+    .mycourse-card{
+        flex-direction: column;
+        align-items: baseline;
+    }
+    .my-course-card-right{
+        display: flex;
+        justify-content: space-between;
+        align-self: normal;
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 1px solid #dbdada;
+    }
+    .my-course-card-right button{
+        margin-left: 0px;
+        padding: 6px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .chapter-info{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 10px;
+        border-bottom: 1px solid #dbdada;
+        border-top: 1px solid #dbdada;
+        background-color: #e6e4e4;
+    }
+    .course-lesson{
+        margin: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        cursor: pointer;
+    }
+}
+
+@media(max-width: 650px){
+    .course-lesson .lesson{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 1px solid #dbdada;
+        padding-bottom: 3px;
+    }
+    .course-lesson .lesson-btn{
+        display: flex;
+        margin-top: 10px;
+        align-items: center;
+        gap: 30px;
+    }
+    .course-lesson .add-lesson{
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        gap: 30px;
+        align-items: flex-start;
+        margin-top: 20px;
+    }
+    .course-lesson .add-lesson input{
+        width: 100%;
+        padding: 10px 20px;
+        font-weight: 400;
+        font-size: 16px;
+        border: none;
+        border: 1px solid #dbdada;
+        border-radius: 5px;
+        outline: none;
+    }
 }
