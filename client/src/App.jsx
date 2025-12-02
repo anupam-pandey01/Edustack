@@ -10,30 +10,37 @@ import ArticlePage from './pages/Article-Page/ArticlePage'
 import TextEditor from './component/TextEditor/TextEditor'
 import MyEnrollment from './pages/Myenrollment/Myenrollment'
 import CourseDescription from './pages/CourseDescription/CourseDescription'
+import { ToastContainer } from 'react-toastify'
+import ProtectedRoute from './utils/ProtectedRoute'
+import { useAuth } from './AuthContext'
 
 const App = () => {
   const [isDashboard, setIsDashboard] = useState(false);
-
+  const { isLoggedIn } = useAuth();
 
   return (
     <div className='app'>
       <Navbar isDashboard={isDashboard} setIsDashboard={setIsDashboard}/>
       <Routes>
         {/* Public Route */}
-        <Route path='/auth' element={<Auth/>}/>
+        <Route path='/auth' element={isLoggedIn ? <Navigate to="/" replace/> :<Auth/>}/>
         <Route path="/" element={<Home/>}/>
         <Route path='/course-list' element={<CourseList/>}/>
         <Route path='/course-list/:courseId' element={<CourseDescription/>}/>
         
         <Route path="*" element={<Navigate to="/" replace/>}/>
         {/* Protected Route */}
-        <Route path='/educator/:userId' element={<Educator/>}/>
-        <Route path='/educator/:userId/c/:courseId' element={<Educator/>}/>
-        <Route path='/educator/:userId/c/:courseId/:lessonId' element={ < Educator /> }/>
-        <Route path="/enrollment/:userId" element={<MyEnrollment/>}/>
-        <Route path='/course/list/:courseId/' element={<ArticlePage/>}/>
+        <Route element={<ProtectedRoute/>}>
+          <Route path='/educator/:userId' element={<Educator/>}/>
+          <Route path='/educator/:userId/c/:courseId' element={<Educator/>}/>
+          <Route path='/educator/:userId/c/:courseId/:lessonId' element={ < Educator /> }/>
+          <Route path="/enrollment/:userId" element={<MyEnrollment/>}/>
+          <Route path='/course-list/article/:courseId/' element={<ArticlePage/>}/>
+        </Route>
+        
       </Routes>
       <Footer/>
+      < ToastContainer />
     </div>
   )
 }

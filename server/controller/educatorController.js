@@ -1,4 +1,5 @@
 const Course = require("../model/course.js");
+const User = require("../model/user.js");
 const cloudinary = require("../config/cloudinaryConfig.js");
 
 
@@ -209,11 +210,56 @@ const saveLessonContent = async (req, res)=>{
   }
 }
 
+
+// Enrolled Student 
+const enrolledStudent = async (req, res)=>{
+  const {educatorId, studentId, courseName, courseId} = req.body;
+  try{
+    // Add Student to Educator 
+    // await User.findByIdAndUpdate({_id: educatorId},
+    //   { $addToSet: { enrolledStudent: studentId } },  // avoid duplicates
+    //   { new: true }
+    // )
+    // await User.findByIdAndUpdate({_id: studentId}, 
+    //   {$addToSet: {enrolledCourse: courseId}},
+    //   { new: true }
+    // )
+    const educator = await User.findById({_id: educatorId});
+    const student = await User.findById({_id: studentId});
+
+    if (!educator || !student){
+      return res.status(404).json({message: "User not found", success: fales})
+    }
+
+    // Add Enrolled Student to Educator
+    const enrolled = {
+      username: student.username,
+      courseName: courseName,
+      date: new Date()
+    }
+    educator.enrolledStudent.push(enrolled);
+    await educator.save()
+
+    // Adding the CourseId to the Student
+    await User.findByIdAndUpdate(
+      studentId,
+      {$addToSet: {enrolledCourse: courseId}},
+      {new: true}
+    )
+
+    return res.status(201).json({message: "Enrolled Successfully", success: true})
+  }catch(err){
+    console.log(err)
+    res.status(500).json({message: "Enrollement Failed", success: false})
+  }
+}
+
 module.exports = { 
     uploadCourseData, 
     getCourseData, 
     addChapter, 
     addLesson,
     saveLessonContent , 
-    fecthLessonContent
+    fecthLessonContent,
+    enrolledStudent
   }

@@ -1,14 +1,28 @@
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
 
+const enrolledSchema = new Schema({
+    username: {
+        type: String,
+        required: true,
+    },
+    courseName:{
+        type: String,
+        required: true,
+    },
+    date: {
+        type: String,
+    }
+})
+
 const userSchema = new Schema({
     username:{
         type: String,
-        require: true
+        required: true
     },
     password:{
         type: String,
-        require: true,
+        required: true,
     },
     email: {
         type: String,
@@ -18,10 +32,13 @@ const userSchema = new Schema({
         type: String,
         enum: ['instructor', 'student']
     },
-    course: {
-        type: Schema.Types.ObjectId,
-        ref: "Course"
-    }
+    enrolledStudent:[ enrolledSchema ],
+    enrolledCourse:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Course"
+        }
+    ]
 });
 
 const User = mongoose.model("User", userSchema);

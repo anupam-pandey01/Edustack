@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import "./AddNewChapter.css"
 import { handleError } from '../../utils/handler'
+import { checkToken } from '../../utils/checkToken'
 
 const AddNewChapter = ({courseId, setCourseData, setPopOpen}) => {
   const [chapterTitle, setChapterTitle] = useState("")
+  const token = localStorage.getItem("token");
 
     useEffect(()=>{
       document.body.style.overflowY = 'hidden';
@@ -19,9 +21,15 @@ const AddNewChapter = ({courseId, setCourseData, setPopOpen}) => {
           method: "POST", 
           headers:{
             "Content-Type": "application/json",
+             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ chapterTitle })
         });
+
+        if(res.status == 401){
+          checkToken("Token Expired");
+        }
+
         const data = await res.json()
         setCourseData(data.course)
         setPopOpen(false)

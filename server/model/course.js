@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("./user")
 const { Schema } = require("mongoose");
 
 
@@ -45,7 +46,7 @@ const courseSchema = new Schema({
         type: Date, 
         default: Date.now
     },
-    chapters: [ chapterSchema ]
+    chapters: [ chapterSchema ], 
 });
 
 

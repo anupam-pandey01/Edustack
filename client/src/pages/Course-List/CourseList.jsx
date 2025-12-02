@@ -31,7 +31,7 @@ const CourseList = () => {
   return (
     <div className='course-list'>
       <div className='search-section'>
-        <span>{<Link to={"/"}>< FaHome size={28}/></Link>}/ Course List</span>
+        <span><Link to={"/"}>< FaHome size={28}/></Link> <span>/</span> <span>Course-list</span></span>
         <div className='course-list-input'>
           <input type="text"  placeholder='Enter the course name'/>
           <button>Search</button>
@@ -43,7 +43,7 @@ const CourseList = () => {
           courseData.map((course)=>{
            return <CourseCard courseTitle={course.courseTitle} courseOwner={course.createdBy.username} 
             createdAt={course.createdAt} courseId={course._id} courseImage={course.courseThumbnail}
-           />
+            key={course._id}/>
           })
         }
         

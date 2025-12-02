@@ -5,7 +5,7 @@ import Dashboard from '../../component/Dashboard/Dashboard';
 import AddCourse from '../../component/AddCourse/AddCourse';
 import MyCourse from '../../component/MyCoures/MyCourse';
 import EnrolledStudent from '../../component/EnrolledStudent/EnrolledStudent';
-import { Link, useParams } from 'react-router';
+import { Link, useParams, useSearchParams } from 'react-router';
 import TextEditor from '../../component/TextEditor/TextEditor';
 
 const Educator = () => {
@@ -14,20 +14,20 @@ const Educator = () => {
   const {userId} = useParams();
   const {courseId} = useParams();
 
-  const onChange = (e)=>{
-    e.preventDefault();
-    setLessonContent(e.target.value)
-  }
+  // Extract query chapter name form url 
+  const [searchParams] = useSearchParams();
+
+  const chapterTitle = searchParams.get("chapterTitle");
 
   return (
     <div className={open?'educator-dashboard':"educator-dashboard-large"}>
       <Sidebar setMenu={setMenu} setOpen={setOpen} open={open} userId={userId}/>
       <main>
-        {menu=="dashboard" &&  <Dashboard/>}
+        {menu=="dashboard" &&  <Dashboard userId={userId}/>}
         {menu=="addcourse" &&  <AddCourse setMenu={setMenu}/>}
         {menu=="mycourse" && <MyCourse menu={menu} userId={userId} courseId={courseId} setMenu={setMenu}/>}
         {menu=="enrolledstudent" && <EnrolledStudent />}
-        {menu=="texteditor" && <TextEditor />}
+        {menu=="texteditor" && <TextEditor courseId={courseId} chapterTitle={chapterTitle}/>}
       </main>
     </div>
   )

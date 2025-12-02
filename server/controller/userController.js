@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const User = require("../model/user");
 const bcrypt  = require("bcryptjs");
 const jwt = require('jsonwebtoken');
+const Course = require('../model/course')
 
 // Controller for the Sign Up route
 async function registerUser(req, res){
@@ -73,7 +74,25 @@ async function loginUser(req, res){
     }
 }
 
+async function getEducatorData(req, res){
+    try{
+        const {userId} = req.params;
+        const user = await User.findById({_id: userId}).select("-password -email");
+        const course = await Course.find({createdBy: userId});
+        if (!user || !course){
+            return res.status(404).json({message: "User not found", success: false})
+        }
+        
+        return res.status(200).json({user: user, totalCourse: course.length})
+
+    }catch(err){
+        console.log("Error during fetching the user data", err);
+        res.status(500).json({message: "Sever Error", success: false})
+    }
+}
+
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    getEducatorData
 }

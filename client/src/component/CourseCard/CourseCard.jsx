@@ -5,9 +5,9 @@ import { Rating } from "react-simple-star-rating"
 import { Link } from 'react-router'
 
 const CourseCard = ({ courseTitle, courseOwner, courseId, courseImage }) => {
-
+ 
   return (
-    <Link to={`/course-list/${courseId}`} className="course-card" key={courseId}>
+    <Link to={`/course-list/${courseId}`} className="course-card">
         <img src={courseImage} alt="thumbnail-image" />
         <div>
             <p className='card-title'>{courseTitle}</p>

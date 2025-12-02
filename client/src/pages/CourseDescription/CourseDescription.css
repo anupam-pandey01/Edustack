@@ -7,12 +7,25 @@
 .course-info{
     flex: 1;
 }
+.course-info-breadCrumb{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 18px;
+    margin-bottom: px;
+}
+.course-info-breadCrumb .bread-crumb-link:hover{
+    text-decoration: underline;
+    color: #0e4af0;
+}
+
+/* Card Section */
 .course-enrolled-card{
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     width: 300px;
-    height: 330px;
+    height: 320px;
     margin-left: 20px;
     border: 1px solid #dbdada;
     border-radius: 5px;
@@ -20,6 +33,7 @@
 }
 .course-enrolled-card img{
     width: 100%;
+    aspect-ratio: 16/9;
 }
 .enrolled-card-title{
     font-size: 17px;
@@ -31,6 +45,7 @@
     padding: 14px;
     font-size: 14px;
     justify-content: space-between;
+    color: #5b5b5b;
 }
 .enrolled-card-label{
     font-size: 13px;
@@ -56,4 +71,64 @@
     margin-top: 20px;
     background-color: #0e4af0;
     color: white;
+    cursor: pointer;
+}
+
+/* Description Section */
+.course-info{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.course-info-upper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.course-info-description{
+    color: #2a2a2a;
+}
+.course-info-author{
+    font-size: 14px;
+    color: #5b5b5b;
+    text-decoration: underline;
+}
+
+/* Course Structure */
+.course-info-middle h3{
+    margin-bottom: 20px;
+}
+.course-info-chapter{
+    margin-bottom: 5px;
+
+}
+.course-info-chapter .chapter-info-accordion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.chapter-info-accordion{
+    margin-bottom: 10px;
+}
+.course-info-chapter{
+    border: 1px solid #bcbcbc;
+    padding: 5px 10px;
+    width: 50%;
+    border-radius: 5px;
+}
+
+/* Lesson Section */
+.course-info-lesson{
+    margin: 20px;
+    border-bottom: 1px solid;
+}
+
+/* Bottom Section */
+.course-info-lower h3{
+    margin-bottom: 10px;
+}
+.course-info-lower{
+    color: #2a2a2a;
 }

@@ -59,6 +59,7 @@ const Auth = () => {
         handleSuccess(message);
         setTimeout(()=>{
           navigate("/");
+          window.location.reload();
         }, 2000)
         
       }else{
@@ -94,7 +95,6 @@ const Auth = () => {
           <p className='form-footer'>Create new account <span onClick={()=>setAuthState("Sign up")}>Sign up</span></p>
         }  
       </form>
-     < ToastContainer />
     </div>
   )
 }

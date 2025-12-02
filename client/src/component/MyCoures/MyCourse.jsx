@@ -10,6 +10,8 @@ import { IoMdArrowDropup } from "react-icons/io"
 import { MdModeEdit } from "react-icons/md"
 import { IoMdAdd } from "react-icons/io"
 import AddNewChapter from '../AddNewChapter/AddNewChapter'
+import { checkToken } from '../../utils/checkToken'
+import { ToastContainer } from 'react-toastify'
 
 
 const MyCourse = ({userId, courseId, setMenu}) => {
@@ -20,7 +22,7 @@ const MyCourse = ({userId, courseId, setMenu}) => {
   const [newLesson, setNewLesson] = useState("");
   const [popOpen, setPopOpen] = useState(false);
 
-  const navigate = useNavigate();
+  const token = localStorage.getItem("token")
   // This function Select the particular Course for dropdown
   const selectCourse = (id)=>{
     if(selected == id){
@@ -41,14 +43,19 @@ const MyCourse = ({userId, courseId, setMenu}) => {
   }
 
   const handleAddNewLesson = async (chapterTitle)=>{
-    const url = `${import.meta.env.VITE_BASE_URL}/lesson/new/${userId}/${courseId}?chapterTitle=${chapterTitle}`
+    const url = `${import.meta.env.VITE_BASE_URL}/lesson/new/${userId}/${courseId}?chapterTitle=${chapterTitle}`;
     const res = await fetch(url, {
       method: "POST", 
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({lessonTitle: newLesson})
     });
+    if(res.status == 401){
+      handleError("Session expired. Please login again");
+      checkToken("Token Expired");
+    }
     const data = await res.json();
     setCourseData(data.course);
     setNewLesson("")
@@ -64,10 +71,21 @@ const MyCourse = ({userId, courseId, setMenu}) => {
       try{
         setIsLoading(true) // Start loading
         const url = `${import.meta.env.VITE_BASE_URL}/getCourseData/${userId}`
-        const respone = await fetch(url);
-        const data = await respone.json()
+        const response = await fetch(url, {
+          method: "GET",
+          headers:{
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+        });
+        
+        if(response.status == 401){
+          checkToken("Token Expired");
+        }
+        const data = await response.json();
         setCourseData(data)
-        setIsLoading(false)
+        // setIsLoading(false)
+
       }catch(err){
         console.error("Educator: Error during the fetching course data", err);
         handleError(err.message)
