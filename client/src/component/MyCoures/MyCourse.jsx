@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from "react-router"
 import "./MyCourse.css"
 import thumbnail1 from "../../assets/thumbnail1.png"
-import { handleError } from '../../utils/handler'
+import { handleError, handleSuccess } from '../../utils/handler'
 import Spinner from '../Spinner/spinner'
 import { AiOutlineDelete } from "react-icons/ai"
 import { IoMdArrowDropdown } from "react-icons/io"
@@ -41,7 +41,36 @@ const MyCourse = ({userId, courseId, setMenu}) => {
     
     setSelectChapter(idx)
   }
+  
+  const handleDeleteCourse = async(courseId)=>{
+    try{
+      const url = `${import.meta.env.VITE_BASE_URL}/course/${userId}/${courseId}`;
+      const res = await fetch(url, {
+        method: "Delete",
+        headers:{
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${ token }`
+        }
+      });
 
+      if(res.status == 401){
+        checkToken("Token Expired");
+      }
+
+      const {message, success, course} = await res.json()
+      if(success){
+        handleSuccess(message);
+        setCourseData(course);
+      }else{
+        handleError(message);
+      }
+    }catch(err){
+      console.log(err)
+      handleError(err)
+    }
+  }
+
+// Handling the Add New Lesson
   const handleAddNewLesson = async (chapterTitle)=>{
     const url = `${import.meta.env.VITE_BASE_URL}/lesson/new/${userId}/${courseId}?chapterTitle=${chapterTitle}`;
     const res = await fetch(url, {
@@ -53,7 +82,6 @@ const MyCourse = ({userId, courseId, setMenu}) => {
       body: JSON.stringify({lessonTitle: newLesson})
     });
     if(res.status == 401){
-      handleError("Session expired. Please login again");
       checkToken("Token Expired");
     }
     const data = await res.json();
@@ -120,7 +148,7 @@ const MyCourse = ({userId, courseId, setMenu}) => {
                 <div className='my-course-card-right'>
                   <button className='edit' onClick={()=> setPopOpen(!popOpen)}>{popOpen ? <Link to={`/educator/${userId}`}><IoMdAdd size={24} color='#fff'/></Link> : <Link to={`/educator/${userId}/c/${course._id}`}><IoMdAdd size={24} color='#fff'/></Link>}</button>
                   {/* <button className='edit'><MdModeEdit size={24} color='#fff'/></button> */}
-                  <button className='delete'><AiOutlineDelete size={24} color='#fff'/></button>
+                  <button className='delete' onClick={()=> handleDeleteCourse(courseId)} > <AiOutlineDelete size={24} color='#fff'/></button>
                   <button className='accordion' onClick={()=> selectCourse(course._id) }> { selected == course._id ? <Link to={`/educator/${userId}`}> <IoMdArrowDropdown size={30}/> </Link> : <Link to={`/educator/${userId}/c/${course._id}`}><IoMdArrowDropup size={30}/></Link> } </button>
                 </div>
               </div>

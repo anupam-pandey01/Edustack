@@ -254,6 +254,30 @@ const enrolledStudent = async (req, res)=>{
   }
 }
 
+
+const deleteCourse = async(req, res)=>{
+    try{
+        const { courseId } = req.params;
+        const { userId }  = req.params;
+
+        if (!courseId){
+           return res.status(404).json({message: "Course not found", success: false})
+        }
+        
+        await Course.findByIdAndDelete({_id: courseId});
+
+        await User.updateMany(
+            {enrolledCourse: courseId},
+            { $pull: {enrolledCourse: courseId}}
+        )
+        const updatedCourse = await Course.find({createdBy: userId});
+        return res.status(200).json({message: "Course Deleted Successfully", success: true, course: updatedCourse});
+    }catch(err){
+        console.log(err)
+        res.status(500).json({message: "Server Error", success: false});
+    }
+}
+
 module.exports = { 
     uploadCourseData, 
     getCourseData, 
@@ -261,5 +285,6 @@ module.exports = {
     addLesson,
     saveLessonContent , 
     fecthLessonContent,
-    enrolledStudent
+    enrolledStudent, 
+    deleteCourse
   }
