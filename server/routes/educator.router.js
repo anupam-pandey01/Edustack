@@ -9,12 +9,12 @@ const auth = require("../Middleware/Auth");
 
 educatorRouter.post("/uploadsCourseData", auth, upload.single("courseImage"), uploadCourseData);
 educatorRouter.get("/getCourseData/:userId", auth, getCourseData);
-educatorRouter.delete("/course/:userId/:courseId", deleteCourse);
+educatorRouter.delete("/course/:userId/:courseId", auth, deleteCourse);
 educatorRouter.post("/chapter/new/:courseId", auth, addChapter);
 educatorRouter.post("/lesson/new/:userId/:courseId",auth,  addLesson);
 educatorRouter.post("/lesson/:courseId/:lessonId",auth,  saveLessonContent);
 educatorRouter.get("/lesson/fetch/:courseId/:lessonId",auth, fecthLessonContent);
-educatorRouter.post('/student/enrolled', enrolledStudent);
+educatorRouter.post('/student/enrolled',auth, enrolledStudent);
 
 
 module.exports = educatorRouter

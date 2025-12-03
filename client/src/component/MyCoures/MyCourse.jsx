@@ -129,7 +129,7 @@ const MyCourse = ({userId, courseId, setMenu}) => {
       <h1>My Courses</h1>
       <div className="mycourse-section">
         {popOpen ?<AddNewChapter courseId={courseId} setCourseData={setCourseData} setPopOpen={setPopOpen}/>: <></> }
-        {courseData.map((course, i)=>(
+        {courseData.map((course)=>(
             <div  className='mycourse-container' key={course._id}>
               <div className="mycourse-card">
                 <div className='mycourse-card-left'>
@@ -148,7 +148,7 @@ const MyCourse = ({userId, courseId, setMenu}) => {
                 <div className='my-course-card-right'>
                   <button className='edit' onClick={()=> setPopOpen(!popOpen)}>{popOpen ? <Link to={`/educator/${userId}`}><IoMdAdd size={24} color='#fff'/></Link> : <Link to={`/educator/${userId}/c/${course._id}`}><IoMdAdd size={24} color='#fff'/></Link>}</button>
                   {/* <button className='edit'><MdModeEdit size={24} color='#fff'/></button> */}
-                  <button className='delete' onClick={()=> handleDeleteCourse(courseId)} > <AiOutlineDelete size={24} color='#fff'/></button>
+                  <button className='delete' onClick={()=> handleDeleteCourse(course._id)} > <AiOutlineDelete size={24} color='#fff'/></button>
                   <button className='accordion' onClick={()=> selectCourse(course._id) }> { selected == course._id ? <Link to={`/educator/${userId}`}> <IoMdArrowDropdown size={30}/> </Link> : <Link to={`/educator/${userId}/c/${course._id}`}><IoMdArrowDropup size={30}/></Link> } </button>
                 </div>
               </div>
