@@ -1,8 +1,11 @@
 .course-description{
-    display: flex;
     padding: 0 5%;
     margin-top: 40px;
     margin-bottom: 40px;
+}
+.course-description-container{
+    display: flex;
+    margin-top: 40px;
 }
 .course-info{
     flex: 1;
@@ -25,7 +28,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     width: 300px;
-    height: 320px;
+    height: fit-content;
     margin-left: 20px;
     border: 1px solid #dbdada;
     border-radius: 5px;
@@ -101,7 +104,6 @@
 }
 .course-info-chapter{
     margin-bottom: 5px;
-
 }
 .course-info-chapter .chapter-info-accordion{
     display: flex;
@@ -131,4 +133,39 @@
 }
 .course-info-lower{
     color: #2a2a2a;
+}
+
+@media(max-width: 1024px){
+    .course-info-chapter{
+        border: 1px solid #bcbcbc;
+        padding: 5px 10px;
+        width: 100%;
+        border-radius: 5px;
+    }
+}
+
+@media(max-width: 778px){
+    .course-description-container{
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    .course-enrolled-card{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: 100%;
+        height: fit-content;
+        margin-left: 0;
+        border: 1px solid #dbdada;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+}
+@media(max-width: 480px){
+    .course-info-upper .course-title{
+        display: none;
+    }
 }

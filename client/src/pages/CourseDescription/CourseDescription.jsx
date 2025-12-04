@@ -74,58 +74,60 @@ const CourseDescription = () => {
   }
   return (
     <div className='course-description'>
-      <div className="course-info">
-            <span className='course-info-breadCrumb'><Link to={"/"} className='bread-crumb-link'>< FaHome size={28}/></Link><span>/</span> <Link to="/course-list" className='bread-crumb-link'>Course-list</Link> <span>/</span> <span>Description</span></span>
-            <div className='course-info-upper'>
-                <h1 className='course-title'>{data.courseTitle}</h1>
-                <p className='course-info-description'>{data.courseDescription}</p>
-                <p className='course-info-author'>Course by {data?.createdBy?.username.toUpperCase()}</p>
-            </div>
+        <span className='course-info-breadCrumb'><Link to={"/"} className='bread-crumb-link'>< FaHome size={28}/></Link><span>/</span> <Link to="/course-list" className='bread-crumb-link'>Course-list</Link> <span>/</span> <span>Description</span></span>
+       <div className='course-description-container'>
+            <div className="course-info">
+                <div className='course-info-upper'>
+                    <h1 className='course-title'>{data.courseTitle}</h1>
+                    <p className='course-info-description'>{data.courseDescription}</p>
+                    <p className='course-info-author'>Course by {data?.createdBy?.username.toUpperCase()}</p>
+                </div>
 
-            <div className='course-info-middle'>
-                <h3>Course Structure</h3>
-                {data?.chapters?.map((chapter, i)=>(
-                    <div className='course-info-chapter' key={i}>
-                        <div className='chapter-info-accordion' onClick={()=> handleAccordion(i)}>
-                            <p>{chapter.chapterTitle}</p>
-                            {selected == i ? <IoIosArrowDropdownCircle size={24}/> : <IoIosArrowDropupCircle size={24}/>}
-                            
-                        </div>
-                        {
-                            selected == i 
-                            ? 
-                           chapter?.lessons.map((lesson, idx)=>(
-                                <div className='course-info-lesson'>
-                                    <p>{lesson.lessonTitle}</p>
-                                </div>
-                           ))
-                            :
-                            <></>
-                        } 
-                    </div>   
-                ))}
-            </div>
+                <div className='course-info-middle'>
+                    <h3>Course Structure</h3>
+                    {data?.chapters?.map((chapter, i)=>(
+                        <div className='course-info-chapter' key={i}>
+                            <div className='chapter-info-accordion' onClick={()=> handleAccordion(i)}>
+                                <p>{chapter.chapterTitle}</p>
+                                {selected == i ? <IoIosArrowDropdownCircle size={24}/> : <IoIosArrowDropupCircle size={24}/>}
+                                
+                            </div>
+                            {
+                                selected == i 
+                                ? 
+                            chapter?.lessons.map((lesson, idx)=>(
+                                    <div className='course-info-lesson'>
+                                        <p>{lesson.lessonTitle}</p>
+                                    </div>
+                            ))
+                                :
+                                <></>
+                            } 
+                        </div>   
+                    ))}
+                </div>
 
-            <div className="course-info-lower">
-                <h3>Course Description</h3>
-                <p>{data.courseDescription}</p>
+                    <div className="course-info-lower">
+                        <h3>Course Description</h3>
+                        <p>{data.courseDescription}</p>
+                    </div>
             </div>
-      </div>
-      <div className='course-enrolled-card'>
-            <div className='course-enrolled-image'>
-                <img src={data?.courseThumbnail} alt="" />
+            <div className='course-enrolled-card'>
+                <div className='course-enrolled-image'>
+                    <img src={data?.courseThumbnail} alt="" />
+                </div>
+                <p className='enrolled-card-title'>{data?.courseTitle}</p>
+                <div className='enrolled-card-info'>
+                    <span className='enrolled-card-label'>Free</span>
+                    <span>|</span>
+                    <p className='enrolled-card-chapter '><FaBook />{data?.chapters?.length} Chapter</p>
+                    <span>|</span>
+                    <p className='enrolled-card-lesson'><FaPencilAlt /> 
+                    4 lesson
+                    </p>
+                </div>
+                <button className='enrolled-card-button' onClick={()=>handleEnrollment(data?.createdBy._id, data.courseTitle)}>Enroll Now</button>
             </div>
-            <p className='enrolled-card-title'>Cloud Computing</p>
-            <div className='enrolled-card-info'>
-                <span className='enrolled-card-label'>Free</span>
-                <span>|</span>
-                <p className='enrolled-card-chapter '><FaBook />{data?.chapters?.length} Chapter</p>
-                <span>|</span>
-                <p className='enrolled-card-lesson'><FaPencilAlt /> 
-                4 lesson
-                </p>
-            </div>
-            <button className='enrolled-card-button' onClick={()=>handleEnrollment(data?.createdBy._id, data.courseTitle)}>Enroll Now</button>
         </div>
     </div>
   )

@@ -21,9 +21,15 @@ const getCourseDetail = async (req, res)=>{
         if(!courseId){
             return res.status(400).json({message: "Bad Request", success: false})
         }
-        const courseDetail = await Course.findById(courseId).populate({
+        const courseDetail = await Course.findById(courseId, {
+            chapters: {
+                $slice: 4
+            }
+        })
+        .select("")
+        .populate({
             path: 'createdBy',
-            select: '-password -email' // Exclude both fields with a space
+            select: 'username' // Exclude both fields with a space
         });
 
         res.status(200).json(courseDetail);
