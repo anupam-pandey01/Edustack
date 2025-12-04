@@ -1,0 +1,83 @@
+.my-enrollment{
+    padding: 0 5%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.my-enrollment h1{
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 550;
+}
+.my-enrollment-container{
+    width: 70%;
+    border: 1px solid #dbdada;
+    padding: 4px 8px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.my-enrollment-course-info{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.my-enrollment-card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.my-enrollment-course-info img{
+    width: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.my-enrollment-course-info .my-enrollment-course-author{
+    font-size: 14px;
+    color: #5e5d5d;
+}
+.my-enrollment-card button{
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #0e4af0;
+    color: #fff;
+}
+
+@media(max-width: 1000px){
+    .my-enrollment-container{
+        width: 100%;
+        border: 1px solid #dbdada;
+        padding: 4px 8px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+}
+
+@media(max-width: 700px){
+    .my-enrollment-card{
+        display: flex;
+        flex-direction: column;
+        justify-content: normal;
+        align-items: normal;
+        gap: 10px;
+    }
+    .my-enrollment-course-title{
+        font-size: 15px;
+    }
+    .my-enrollment-course-author{
+        font-size: 13px;
+    }
+}
+
+@media(max-width: 500px){
+    .my-enrollment-course-info{
+        display: flex;
+        flex-direction: column;
+        align-items: normal;
+        gap: 20px;
+    }
+    .my-enrollment-course-info img{
+        width: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+}
