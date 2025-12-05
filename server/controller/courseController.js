@@ -26,7 +26,6 @@ const getCourseDetail = async (req, res)=>{
                 $slice: 4
             }
         })
-        .select("")
         .populate({
             path: 'createdBy',
             select: 'username' // Exclude both fields with a space
