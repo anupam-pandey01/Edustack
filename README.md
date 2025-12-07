@@ -3,7 +3,7 @@
 EduStack is a full-featured Learning Management System designed to help educators create, manage, and deliver courses efficiently. It includes features for course creation, chapters, lessons, secure authentication, user dashboards, and content editing using a rich text editor. Built with a modern MERN stack architecture, EduStack is fast, scalable, and production-ready.
 
 <p align="center">
-  <img src="docs/lms (2).png" width="800" />
+  <img src="docs/assets/lms.png" width="800" />
 </p>
 ---
 
