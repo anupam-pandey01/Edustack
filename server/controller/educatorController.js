@@ -276,6 +276,53 @@ const deleteCourse = async(req, res)=>{
         console.log(err)
         res.status(500).json({message: "Server Error", success: false});
     }
+};
+
+
+const getHtml = async(req, res)=>{
+  const { lessonId, courseId } = req.params;
+  const { chapterTitle } = req.query;
+  
+  try{
+    const course = await Course.findById(courseId).populate({
+      path: "createdBy",
+      select: "-email -password"
+    });
+
+    if(!course){
+      return res.status(404).json({message: "Course not found", success: false})
+    }
+
+    const chapter = course.chapters.find((chapter) => chapter.chapterTitle === chapterTitle);
+
+    if(!chapter){
+      return res.status(404).json({message: "Chapter not found", success: false});
+    }
+
+    const lesson = chapter.lessons.find((lesson)=> lesson._id == lessonId);
+
+    if(!lesson){
+      return res.status(404).json({message: "Lesson not found", success: false});
+    }
+
+    return res.status(200).json({ lesson: lesson, success: true });
+  }catch(err){
+    console.log(err);
+    return res.status(500).json({message: "Server Error", success: false});
+  }
+}
+
+
+const addHtml = async function(req, res){
+  const { html } = req.body;
+  const { courseId, lessonId, chapterTitle} = req.params;
+
+  try{
+
+  }catch(err){
+    console.log(err);
+    return res.status(500).json({message: "Server Error", success: false});
+  }
 }
 
 module.exports = { 
@@ -286,5 +333,6 @@ module.exports = {
     saveLessonContent , 
     fecthLessonContent,
     enrolledStudent, 
-    deleteCourse
+    deleteCourse, 
+    getHtml,
   }

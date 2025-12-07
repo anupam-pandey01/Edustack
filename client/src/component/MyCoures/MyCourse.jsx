@@ -171,7 +171,7 @@ const MyCourse = ({userId, courseId, setMenu}) => {
                         <div className="lesson" key={lesson._id}>
                           <p>{lesson.lessonTitle}</p>
                           <div className='lesson-btn'>
-                            <Link to={`/educator/${userId}/c/${course._id}/${lesson._id}?chapterTitle=${chapter.chapterTitle}`}> <button className="update" onClick={()=> setMenu("texteditor")}>Update</button> </Link>
+                            <Link to={`/educator/${userId}/c/${course?._id}/${lesson?._id}?chapterTitle=${chapter?.chapterTitle}`}> <button className="update" onClick={()=> setMenu("texteditor")}>Update</button></Link>
                             <button className="delete">Delete</button>
                           </div>
                         </div>

@@ -59,7 +59,7 @@ const Auth = () => {
         handleSuccess(message);
         setTimeout(()=>{
           navigate("/");
-          window.location.reload();
+          // window.location.reload();
         }, 2000)
         
       }else{
