@@ -310,8 +310,43 @@ const getHtml = async(req, res)=>{
     console.log(err);
     return res.status(500).json({message: "Server Error", success: false});
   }
-}
+};
 
+const saveHtml = async(req, res)=>{
+  const { lessonId, courseId } = req.params;
+  const { chapterTitle } = req.query;
+  const { html } = req.body;
+
+  try{
+    const course = await Course.findById(courseId).populate({
+      path: "createdBy",
+      select: "-email -password"
+    });
+
+    if(!course){
+      return res.status(404).json({message: "Course not found", success: false})
+    }
+
+    const chapter = course.chapters.find((chapter) => chapter.chapterTitle === chapterTitle);
+
+    if(!chapter){
+      return res.status(404).json({message: "Chapter not found", success: false});
+    }
+
+    const lesson = chapter.lessons.find((lesson)=> lesson._id == lessonId);
+
+    if(!lesson){
+      return res.status(404).json({message: "Lesson not found", success: false});
+    }
+
+    lesson.content = html;
+    await course.save()
+    return res.status(200).json({ message: "Lesson updated successfully", success: true });
+  }catch(err){
+    console.log(err);
+    return res.status(500).json({message: "Server Error", success: false});
+  }
+}
 
 const addHtml = async function(req, res){
   const { html } = req.body;
@@ -335,4 +370,5 @@ module.exports = {
     enrolledStudent, 
     deleteCourse, 
     getHtml,
+    saveHtml
   }

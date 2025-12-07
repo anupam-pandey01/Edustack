@@ -1,6 +1,6 @@
 const express = require("express");
 const educatorRouter = express.Router();
-const { uploadCourseData, getCourseData, addChapter, addLesson, saveLessonContent, fecthLessonContent, enrolledStudent, deleteCourse, getHtml } = require("../controller/educatorController");
+const { uploadCourseData, getCourseData, addChapter, addLesson, saveLessonContent, fecthLessonContent, enrolledStudent, deleteCourse, getHtml, saveHtml } = require("../controller/educatorController");
 const upload = require("../Middleware/multer");
 const auth = require("../Middleware/Auth");
 
@@ -15,7 +15,8 @@ educatorRouter.post("/lesson/new/:userId/:courseId",auth,  addLesson);
 educatorRouter.post("/lesson/:courseId/:lessonId",auth,  saveLessonContent);
 educatorRouter.get("/lesson/fetch/:courseId/:lessonId",auth, fecthLessonContent);
 educatorRouter.post('/student/enrolled',auth, enrolledStudent);
-educatorRouter.get("/getHtml/:courseId/:lessonId", getHtml)
+educatorRouter.get("/getHtml/:courseId/:lessonId", getHtml);
+educatorRouter.put("/saveHtml/:courseId/:lessonId", saveHtml);
 
 
 module.exports = educatorRouter

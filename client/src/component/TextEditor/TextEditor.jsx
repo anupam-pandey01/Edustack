@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
 import { checkToken } from '../../utils/checkToken';
-import { handleError } from "../../utils/handler"
+import { handleError, handleSuccess } from "../../utils/handler"
 
-const TextEditor = ({ courseId, chapterTitle, lessonId }) => {
+const TextEditor = ({ courseId, chapterTitle, lessonId, setMenu }) => {
   const editorRef = useRef(null);
   const [content, setContent] = useState("");   // stores updated content from editor
 
@@ -14,10 +14,36 @@ const TextEditor = ({ courseId, chapterTitle, lessonId }) => {
 
   
   const token = localStorage.getItem("token");
-  // console.log(courseId);
-  // console.log(lessonId);
-  // console.log(chapterTitle);
 
+  const handleUpdate = async ()=>{
+    try{
+      const url = `${import.meta.env.VITE_BASE_URL}/saveHtml/${courseId}/${lessonId}?chapterTitle=${chapterTitle}`;
+      const res = await fetch(url,{
+        method: "PUT",
+        headers:{
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ html: content })
+      })
+
+      if(res.status == 401){
+        checkToken("Token Expired");
+      }
+
+      const { success, message } = await res.json();
+
+      if(success){
+        handleSuccess(message);
+        setMenu("mycourse");
+      }else{
+        handleError(message);
+      }
+    }catch(err){
+      console.log(err);
+      handleError(err);
+    }
+  }
   useEffect(()=>{
     async function getHtml(){
       if (!lessonId || !courseId) return;
@@ -51,32 +77,6 @@ const TextEditor = ({ courseId, chapterTitle, lessonId }) => {
     getHtml()
   }, [lessonId])
 
-  // Fetch existing HTML when the component loads
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await fetch(`/lesson/fetch/:courseId/:lessonId`);
-  //       const data = await res.json();
-  //       setContent(data.html || ''); // 👈 set editor value
-  //     } catch (err) {
-  //       console.error('Error fetching content:', err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [documentId]);
-
-  // const config = {
-  //   height: 500,
-  //   buttons: [
-  //     'bold', 'italic', 'underline', '|',
-  //     'font', 'fontsize', 'paragraph', '|',
-  //     'link', '|',
-  //     'align', 'undo', 'redo', 'fullsize', 'preview'
-  //   ],
-  // };
-
   const editorComponent = useMemo(() => {
     if (!isLoaded) return null;
 
@@ -99,17 +99,6 @@ const TextEditor = ({ courseId, chapterTitle, lessonId }) => {
     );
   }, [isLoaded]);
 
-  // const handleUpdate = async () => {
-  //   await fetch(`/api/content/${documentId}`, {
-  //     method: 'PUT',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ html: content }),
-  //   });
-  //   alert('Updated successfully!');
-  // };
-
-  // if (loading) return <p>Loading existing content...</p>;
-
   return (
     <div style={{ width: '100%', }}>
       <h2 style={{marginBottom: "40px"}}>{lesson?.lessonTitle}</h2>
@@ -125,38 +114,12 @@ const TextEditor = ({ courseId, chapterTitle, lessonId }) => {
           borderRadius: '5px',
           cursor: 'pointer',
         }}
+
+        onClick={()=> handleUpdate()}
       >
         Update
       </button>
     </div>
-    // <div style={{ width: '100%', }}>
-    //   <h2>{lesson?.lessonTitle}</h2>
-    //  {isLoaded && (
-    //   <JoditEditor
-    //     ref={editor}
-    //     value={initialContent}     // ✔ initial load only
-    //     config={config}
-    //     onChange={(html) => setContent(html)}  // live typing
-    //   />
-    // )}
-
-    
-
-    //   <button
-    //     // onClick={handleUpdate}
-    //     style={{
-    //       marginTop: '20px',
-    //       background: '#007bff',
-    //       color: 'white',
-    //       border: 'none',
-    //       padding: '10px 20px',
-    //       borderRadius: '5px',
-    //       cursor: 'pointer',
-    //     }}
-    //   >
-    //     Update
-    //   </button>
-    // </div>
   );
 };
 

@@ -30,7 +30,7 @@ const Educator = () => {
         {menu=="addcourse" &&  <AddCourse setMenu={setMenu}/>}
         {menu=="mycourse" && <MyCourse menu={menu} userId={userId} courseId={courseId} setMenu={setMenu}/>}
         {menu=="enrolledstudent" && <EnrolledStudent />}
-        {menu=="texteditor" && <TextEditor courseId={courseId} lessonId={lessonId} chapterTitle={chapterTitle}/>}
+        {menu=="texteditor" && <TextEditor courseId={courseId} lessonId={lessonId} chapterTitle={chapterTitle} setMenu={setMenu}/>}
       </main>
     </div>
   )
