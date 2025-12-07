@@ -66,7 +66,7 @@ cp .env.example
 npm run dev
 ```
 
-# Add VITE_BASE_URL=http://localhost:5000/api
+# Add VITE_BASE_URL=http://localhost:5000/
 ```bash
 cd client
 npm install
