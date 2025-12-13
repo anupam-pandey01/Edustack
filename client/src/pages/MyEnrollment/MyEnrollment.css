@@ -40,6 +40,7 @@
     border-radius: 5px;
     background-color: #0e4af0;
     color: #fff;
+    cursor: pointer;
 }
 
 @media(max-width: 1000px){
