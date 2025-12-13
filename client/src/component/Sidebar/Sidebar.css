@@ -44,6 +44,9 @@
     font-size: 14px;
     font-weight: 430;
 }
+.mobile-side-bar{
+    display: none;
+}
 
 @media(max-width: 1240px){
     #sidebar{
@@ -59,10 +62,12 @@
         transition: 0.3s, ease-out;
         left: 0;border-right: 1px solid #dcdcdc;
         background-color: #faf7f7;
+        z-index: 1;
     }
     .sidebar-closer{
         align-self: flex-end;
         margin: 10px;
+        cursor: pointer;
     }
 }
 
