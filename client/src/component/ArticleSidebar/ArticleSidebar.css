@@ -1,0 +1,54 @@
+.article-sidebar-container{
+    width: 250px;
+    height: 100vh;
+    border-right: 1px solid #dcdcdc;
+    overflow-y: scroll;
+    scrollbar-width: none; 
+    padding: 20px 0;
+}
+.article-sidebar-container h3{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cdcccc;
+}
+.article-sidebar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.chapter-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 16px;
+    border-bottom: 1px solid #cdcccc;
+}
+
+.chapter-container .chapter:hover{
+    background-color: #7e9df143;
+    /* border-right: 5px solid #0e4af0; */
+}
+
+.chapter-container .chapter{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Lesson Container */
+
+.lesson-container .lesson{
+    background-color: #f0f0f0;
+    border-top: 1px solid #cdcccc;
+    padding: 10px 28px;
+    cursor: pointer;
+}
+.chapter-container .lesson:hover{
+    background-color: #7e9df143;
+    /* border-right: 5px solid #0e4af0; */
+}
