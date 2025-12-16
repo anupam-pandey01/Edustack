@@ -9,6 +9,18 @@ const ArticleSidebar = ({ courseId, setArticle }) => {
     const [data, setData] = useState({});
     const token = localStorage.getItem("token");
 
+    const selectContent = (chapterId, lessonId)=>{
+        const selectChapter  = data?.chapters?.find((chapter)=>(
+            chapter._id == chapterId
+        ));
+
+        const selectlesson  = selectChapter.lessons.find((lesson)=>(
+            lesson._id == lessonId
+        ));
+
+        setArticle(selectlesson.content)
+    }
+
     useEffect(()=>{
         const getCourseData = async ()=>{
         try{
@@ -26,8 +38,9 @@ const ArticleSidebar = ({ courseId, setArticle }) => {
             }
 
             const { success, course } = await res.json();
+
             if(success){
-                setData(course)
+                setData(course);
             }
             }
         catch(err){
@@ -35,8 +48,21 @@ const ArticleSidebar = ({ courseId, setArticle }) => {
             handleError(err);
         }
         };
-        getCourseData()
+        getCourseData();
     }, []);
+
+
+    // Auto fetching FirstChapter and FirstLesson
+    useEffect(() => {
+        if (!data?.chapters?.length) return;
+
+        const firstChapter = data.chapters[0];
+        const firstLesson = firstChapter.lessons[0];
+
+        if (firstChapter && firstLesson) {
+            selectContent(firstChapter._id, firstLesson._id);
+        }
+    },[data]);
 
     function handleLesson(idx) {
         setLessonSet(prev => {
@@ -46,6 +72,10 @@ const ArticleSidebar = ({ courseId, setArticle }) => {
         });
     }
     
+
+    
+
+
   return (
     <div className='article-sidebar-container'>
         <h3>{data?.courseTitle?.split(" ").slice(0, 4).join(" ") + "..."}</h3>
@@ -59,7 +89,7 @@ const ArticleSidebar = ({ courseId, setArticle }) => {
                 ( <div className="chapter-container" >
                     <div className="chapter" onClick={ ()=> {
                         handleLesson(idx)
-                        selectContent(chapter.chapterTitle, chapter.lessons[0].lessonTitle)
+                        selectContent(chapter._id, chapter.lessons[0]._id)
                     }}>
                         <span>{chapter?.chapterTitle}</span>
                         {
@@ -73,7 +103,7 @@ const ArticleSidebar = ({ courseId, setArticle }) => {
                             {chapter?.lessons?.map((lesson)=>(
                                 lesson.content 
                                 && 
-                                (< div className='lesson' onClick={ ()=>selectContent(chapter.chapterTitle, lesson.lessonTitle) }>{lesson?.lessonTitle}</div> )
+                                (< div className='lesson' onClick={ ()=>selectContent(chapter._id, lesson._id) }>{lesson?.lessonTitle}</div> )
                             ))}
                         </div>)
                     }
