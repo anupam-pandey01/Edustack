@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./ArticlePage.css";
 import ArticleSidebar from '../../component/ArticleSidebar/ArticleSidebar';
 import { useParams } from 'react-router';
+import DOMPurify from "dompurify";
 
 const ArticlePage = () => {
   const { courseId } = useParams();
@@ -15,7 +16,7 @@ const ArticlePage = () => {
 
       <div
         className="article-view"
-        dangerouslySetInnerHTML={{ __html: article }}
+        dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(article)}}
       />
     </div>
   );

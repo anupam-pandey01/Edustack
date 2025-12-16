@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dompurify": "^3.3.1",
     "jodit-react": "^5.2.26",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

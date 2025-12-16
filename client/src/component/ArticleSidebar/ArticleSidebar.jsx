@@ -8,18 +8,6 @@ const ArticleSidebar = ({ courseId, setArticle }) => {
     const [lessonSet, setLessonSet] = useState(new Set());
     const [data, setData] = useState({});
     const token = localStorage.getItem("token");
-    
-    const selectContent = (chapterId, lessonId)=>{
-        const selectChapter  = data?.chapters?.find((chapter)=>(
-            chapter.chapterTitle == chapterId
-        ));
-
-        const selectlesson  = selectChapter?.lessons.find((lesson)=>(
-            lesson.lessonTitle == lessonId
-        ));
-
-        setArticle(selectlesson.content)
-    }
 
     useEffect(()=>{
         const getCourseData = async ()=>{
