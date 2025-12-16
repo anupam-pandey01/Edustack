@@ -1,25 +1,24 @@
-import React, {useState, useEffect} from 'react'
-import "./ArticlePage.css"
-import ArticleSidebar from '../../component/ArticleSidebar/ArticleSidebar'
-import { handleError } from '../../utils/handler';
+import React, { useState } from 'react';
+import "./ArticlePage.css";
+import ArticleSidebar from '../../component/ArticleSidebar/ArticleSidebar';
 import { useParams } from 'react-router';
-
 
 const ArticlePage = () => {
   const { courseId } = useParams();
-  const [ article, setArticle ] = useState("");
+  const [article, setArticle] = useState("");
 
   return (
-    <div className='article-page'>
+    <div className="article-page">
       <div className="article-sidebar">
-        <ArticleSidebar courseId={courseId} setArticle={setArticle}/>
+        <ArticleSidebar courseId={courseId} setArticle={setArticle} />
       </div>
-      <div className="aricle-view">
-        {/* Render the html from the DB */}
-        <p>Hello</p>
-      </div>
-    </div>
-  )
-}
 
-export default ArticlePage
+      <div
+        className="article-view"
+        dangerouslySetInnerHTML={{ __html: article }}
+      />
+    </div>
+  );
+};
+
+export default ArticlePage;
