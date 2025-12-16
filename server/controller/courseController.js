@@ -45,11 +45,14 @@ const getFullArticle = async (req, res)=>{
     }
 
     try{
-        const course = await Course.findById({_id: courseId});
+        const course = await Course.findById(courseId).populate({
+            path: "createdBy",
+            select: "username"
+        })
         if(!course){
             return res.status(400).json({message: "Bad Request"})
         }
-        res.satus(200).json(course);
+        res.status(200).json({success: true, course});
     }catch(err){
         console.log("Error during the fetching full article", err);
         res.status(500).json({message: "Server error", sucess: false})
@@ -86,4 +89,5 @@ module.exports = {
     getCourseData,
     getCourseDetail,
     getMyEnrollment,
+    getFullArticle,
 }

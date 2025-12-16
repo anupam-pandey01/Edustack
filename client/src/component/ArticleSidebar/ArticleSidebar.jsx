@@ -1,87 +1,96 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./ArticleSidebar.css"
-import { FaAngleDown } from "react-icons/fa6";
+import { checkToken } from '../../utils/checkToken';
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { handleError } from '../../utils/handler';
 
-const ArticleSidebar = () => {
-
+const ArticleSidebar = ({ courseId, setArticle }) => {
     const [lessonSet, setLessonSet] = useState(new Set());
+    const [data, setData] = useState({});
+    const token = localStorage.getItem("token");
+    
+    const selectContent = (chapterId, lessonId)=>{
+        const selectChapter  = data?.chapters?.find((chapter)=>(
+            chapter.chapterTitle == chapterId
+        ));
+
+        const selectlesson  = selectChapter?.lessons.find((lesson)=>(
+            lesson.lessonTitle == lessonId
+        ));
+
+        setArticle(selectlesson.content)
+    }
+
+    useEffect(()=>{
+        const getCourseData = async ()=>{
+        try{
+            const url = `${import.meta.env.VITE_BASE_URL}/articleData/${courseId}`;
+            const res = await fetch(url, {
+                method: "GET", 
+                headers:{
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+        
+            if(res.status == 401){
+                checkToken("Token Expired");
+            }
+
+            const { success, course } = await res.json();
+            if(success){
+                setData(course)
+            }
+            }
+        catch(err){
+            console.log(err);
+            handleError(err);
+        }
+        };
+        getCourseData()
+    }, []);
 
     function handleLesson(idx) {
         setLessonSet(prev => {
-        const newSet = new Set(prev);
-        newSet.has(idx) ? newSet.delete(idx) : newSet.add(idx);
-        return newSet;
+            const newSet = new Set(prev);
+            newSet.has(idx) ? newSet.delete(idx) : newSet.add(idx);
+            return newSet;
         });
     }
-    const allChapter = [
-        {
-            chapter: "What is Node",
-            lesson: ["lesson 1", "lesson 2", "lesson 3"]
-        },
-
-        {
-            chapter: "Node-Installation",
-            lesson: ["lesson 1", "lesson 2", "lesson 3"]
-        },
-
-        {
-            chapter: "Node-Installation",
-            lesson: ["lesson 1", "lesson 2", "lesson 3"]
-        },
-
-        {
-            chapter: "Node-Installation",
-            lesson: ["lesson 1", "lesson 2", "lesson 3"]
-        },
-
-        {
-            chapter: "Node-Installation",
-            lesson: ["lesson 1", "lesson 2", "lesson 3"]
-        },
-
-        {
-            chapter: "Node-Installation",
-            lesson: ["lesson 1", "lesson 2", "lesson 3"]
-        },
-
-        {
-            chapter: "Node-Installation",
-            lesson: ["lesson 1", "lesson 2", "lesson 3"]
-        },
-
-        {
-            chapter: "Node-Installation",
-            lesson: ["lesson 1", "lesson 2", "lesson 3"]
-        },
-
-        {
-            chapter: "History of Node",
-            lesson: [ "lesson 1", "lesson 2", "lesson 3"]
-        }
-    ]
-
+    
   return (
     <div className='article-sidebar-container'>
-        <h3>All Chapter</h3>
+        <h3>{data?.courseTitle?.split(" ").slice(0, 4).join(" ") + "..."}</h3>
       <div className='article-sidebar'>
-            {allChapter.map((chapter, idx)=>(
-                <div className="chapter-container" onClick={()=>handleLesson(idx)}>
-                    <div className="chapter">
-                        <span>{chapter.chapter}</span>
-                        <FaAngleDown size={16}/>
+            {data?.chapters?.map((chapter, idx)=>(
+                chapter.lessons.length != 0 
+                && 
+                chapter.lessons[0].content 
+                && 
+
+                ( <div className="chapter-container" >
+                    <div className="chapter" onClick={ ()=> {
+                        handleLesson(idx)
+                        selectContent(chapter.chapterTitle, chapter.lessons[0].lessonTitle)
+                    }}>
+                        <span>{chapter?.chapterTitle}</span>
+                        {
+                           lessonSet.has(idx) ? <IoIosArrowUp size={24}/>  : <IoIosArrowDown size={24}/>
+                        }   
                     </div>
                     {
-                        lessonSet.has(idx) && 
-
-                        <div className='lesson-container'>
-                            {chapter.lesson.map((lesson)=>(
-                                <div className='lesson'>{lesson}</div>
+                        lessonSet.has(idx)
+                        && 
+                        (<div className='lesson-container'>
+                            {chapter?.lessons?.map((lesson)=>(
+                                lesson.content 
+                                && 
+                                (< div className='lesson' onClick={ ()=>selectContent(chapter.chapterTitle, lesson.lessonTitle) }>{lesson?.lessonTitle}</div> )
                             ))}
-                            
-                        </div>
+                        </div>)
                     }
                     
-                </div>
+                </div> )
             ))}
             
       </div>
