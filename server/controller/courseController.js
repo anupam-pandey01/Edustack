@@ -85,9 +85,31 @@ const getMyEnrollment = async (req, res)=>{
         res.status(500).json({message: "Server Error", success: false});
     }
 }
+
+const checkEnrolled = async(req, res)=>{
+    const { courseId } = req.params;
+    const { userId } = req.params;
+
+    try{
+        const user = await User.findById(userId);
+        if(!user){
+            return res.status(404).json({message: "user not found", success:false})
+        }
+        for(const enrollCourseId of user.enrolledCourse){
+            if (enrollCourseId == courseId){
+                return res.status(200).json({success: true})
+            }
+        }
+        return res.status(404).json({success: false});
+    }catch(err){
+        console.log(err)
+       return res.status(500).json({ message: "Error during check the user enrolled in course or not"})
+    }
+}
 module.exports = {
     getCourseData,
     getCourseDetail,
     getMyEnrollment,
     getFullArticle,
+    checkEnrolled,
 }
