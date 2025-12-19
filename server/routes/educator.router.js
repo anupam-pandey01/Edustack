@@ -15,8 +15,8 @@ educatorRouter.post("/lesson/new/:userId/:courseId",auth,  addLesson);
 educatorRouter.post("/lesson/:courseId/:lessonId",auth,  saveLessonContent);
 educatorRouter.get("/lesson/fetch/:courseId/:lessonId",auth, fecthLessonContent);
 educatorRouter.post('/student/enrolled',auth, enrolledStudent);
-educatorRouter.get("/getHtml/:courseId/:lessonId", getHtml);
-educatorRouter.put("/saveHtml/:courseId/:lessonId", saveHtml);
+educatorRouter.get("/getHtml/:courseId/:lessonId",auth, getHtml);
+educatorRouter.put("/saveHtml/:courseId/:lessonId",auth, saveHtml);
 
 
 module.exports = educatorRouter

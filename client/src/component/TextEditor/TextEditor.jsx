@@ -17,6 +17,8 @@ const TextEditor = ({ courseId, chapterTitle, lessonId, setMenu }) => {
 
   const handleUpdate = async ()=>{
     try{
+      if (!lessonId || !courseId) return ;
+
       const url = `${import.meta.env.VITE_BASE_URL}/saveHtml/${courseId}/${lessonId}?chapterTitle=${chapterTitle}`;
       const res = await fetch(url,{
         method: "PUT",

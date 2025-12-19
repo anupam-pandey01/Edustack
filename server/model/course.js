@@ -7,7 +7,6 @@ const { Schema } = require("mongoose");
 const lessonSchema = new Schema({
     lessonTitle: {
         type: String,
-        required: true
     },
     content: {
         type: String
