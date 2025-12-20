@@ -16,6 +16,7 @@ import { useAuth } from './AuthContext'
 import LaunchingPage from './pages/Launch/LaunchingPage'
 import AboutUs from './pages/AboutUs/AboutUs'
 import ContactUs from './pages/ContactUs/ContactUs'
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy'
 
 const App = () => {
   const [isDashboard, setIsDashboard] = useState(false);
@@ -33,6 +34,7 @@ const App = () => {
         <Route path='/review' element={<LaunchingPage/>}/>
         <Route path='/about-us' element={<AboutUs/>}/>
         <Route path='/contact-us' element={<ContactUs/>}/>
+        <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
 
         
         <Route path="*" element={<Navigate to="/" replace/>}/>
