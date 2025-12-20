@@ -14,11 +14,11 @@
     font-weight: 450;
     border-bottom: 1px solid #cdcccc;
 }
-.article-sidebar{
+/* .article-sidebar{
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
+} */
 
 .chapter-container{
     display: flex;
