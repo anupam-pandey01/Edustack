@@ -15,6 +15,7 @@ import ProtectedRoute from './utils/ProtectedRoute'
 import { useAuth } from './AuthContext'
 import LaunchingPage from './pages/Launch/LaunchingPage'
 import AboutUs from './pages/AboutUs/AboutUs'
+import ContactUs from './pages/ContactUs/ContactUs'
 
 const App = () => {
   const [isDashboard, setIsDashboard] = useState(false);
@@ -31,6 +32,7 @@ const App = () => {
         <Route path='/course-list/:courseId' element={<CourseDescription/>}/>
         <Route path='/review' element={<LaunchingPage/>}/>
         <Route path='/about-us' element={<AboutUs/>}/>
+        <Route path='/contact-us' element={<ContactUs/>}/>
 
         
         <Route path="*" element={<Navigate to="/" replace/>}/>
