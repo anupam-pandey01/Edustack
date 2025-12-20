@@ -14,6 +14,7 @@ import { ToastContainer } from 'react-toastify'
 import ProtectedRoute from './utils/ProtectedRoute'
 import { useAuth } from './AuthContext'
 import LaunchingPage from './pages/Launch/LaunchingPage'
+import AboutUs from './pages/AboutUs/AboutUs'
 
 const App = () => {
   const [isDashboard, setIsDashboard] = useState(false);
@@ -29,6 +30,7 @@ const App = () => {
         <Route path='/course-list' element={<CourseList/>}/>
         <Route path='/course-list/:courseId' element={<CourseDescription/>}/>
         <Route path='/review' element={<LaunchingPage/>}/>
+        <Route path='/about-us' element={<AboutUs/>}/>
 
         
         <Route path="*" element={<Navigate to="/" replace/>}/>

@@ -15,10 +15,11 @@ const Footer = () => {
       </div>
       <div className="about-platform">
         <ul>
-            <li>Home</li>
-            <li>About us</li>
-            <li>Contact us</li>
-            <li>Privacy policy</li>
+            
+            <Link to="/"><li>Home</li></Link>
+            <Link to="/about-us"><li>About us</li></Link>
+            <Link to="/contact-us"><li>Contact us</li></Link>
+            <Link to="/privacy-policy"><li>Privacy policy</li></Link>
         </ul>
       </div>
       <div className="feedback-section">
