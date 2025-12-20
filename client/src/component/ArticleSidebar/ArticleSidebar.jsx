@@ -18,7 +18,7 @@ const ArticleSidebar = ({ courseId, setArticle }) => {
             lesson._id == lessonId
         ));
 
-        setArticle(selectlesson.content)
+        setArticle(selectlesson)
     }
 
     useEffect(()=>{

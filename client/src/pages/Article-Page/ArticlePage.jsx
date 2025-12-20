@@ -8,16 +8,33 @@ const ArticlePage = () => {
   const { courseId } = useParams();
   const [article, setArticle] = useState("");
 
+  console.log(article.content)
   return (
     <div className="article-page">
       <div className="article-sidebar">
         <ArticleSidebar courseId={courseId} setArticle={setArticle} />
       </div>
 
-      <div
-        className="article-view"
-        dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(article)}}
-      />
+      <div className='aritcle-container'>
+        <h2 className='aritcleLesson'>{article.lessonTitle}</h2>
+        
+        <div
+          className="article-view"
+          dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(article.content, {
+                ADD_TAGS: ['iframe'],
+                ADD_ATTR: [
+                  'allow',
+                  'allowfullscreen',
+                  'frameborder',
+                  'scrolling'
+                ]
+              })
+          }}
+
+        />
+      </div>
+      
     </div>
   );
 };

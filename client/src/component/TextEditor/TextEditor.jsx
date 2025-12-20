@@ -92,8 +92,8 @@ const TextEditor = ({ courseId, chapterTitle, lessonId, setMenu }) => {
             "bold", "italic", "underline", "|",
             'ul', 'ol', '|',
             "font", "fontsize", "paragraph", "|",
-            "link", "|",
-            "align", "undo", "redo", "fullsize", "preview"
+            "image","video","link", "|",
+            "align", "undo", "redo", "preview"
           ],
         }}
         onChange={(html) => setContent(html)} // typing stays smooth
