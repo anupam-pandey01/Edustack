@@ -64,6 +64,7 @@
     padding: 2px 4px;
     border-radius: 2px;
     font-size: 12px;
+    cursor: pointer;
 }
 
 @media(max-width:940px){
