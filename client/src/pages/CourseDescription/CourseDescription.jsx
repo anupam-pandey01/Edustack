@@ -11,15 +11,16 @@ import { checkToken } from '../../utils/checkToken';
 
 const CourseDescription = () => {
     const [data, setData] = useState({});
-    const [selected, setSelected] = useState(null)
+    const [selected, setSelected] = useState(null);
+    const [userEnrolled, setUserEnrolled] = useState(false);
     const {courseId} = useParams();
 
-
+    
     const navigate = useNavigate();
 
-    const token = localStorage.getItem('token');
     const userId = localStorage.getItem("userId");
  
+// Get Description Data from server
   useEffect(()=>{
     async function getCourseData(){
         const url = `${import.meta.env.VITE_BASE_URL}/course/list/${courseId}`;
@@ -32,6 +33,22 @@ const CourseDescription = () => {
     getCourseData();
   }, [])
 
+// Check that current user is enrolled in this course or not
+   useEffect(()=>{
+    if(!userId) return;
+
+    async function userEnrolled(){
+        const url = `${import.meta.env.VITE_BASE_URL}/checkEnrollment/${userId}/${courseId}`;
+        const res = await fetch(url, {
+            method: "GET",
+        });
+        const { success } = await res.json();
+        if(success){
+            setUserEnrolled(true)
+        }
+    }
+    userEnrolled();
+   }, [])  
 // Handle Accordion
   const handleAccordion = (i)=>{
     if (selected === i){
@@ -126,7 +143,7 @@ const CourseDescription = () => {
                     4 lesson
                     </p>
                 </div>
-                <button className='enrolled-card-button' onClick={()=>handleEnrollment(data?.createdBy._id, data.courseTitle)}>Enroll Now</button>
+                {userEnrolled ? <Link className='enrolled-card-button' to={`/course-list/article/${courseId}`}>Continue</Link> : <button className='enrolled-card-button' onClick={()=>handleEnrollment(data?.createdBy._id, data.courseTitle)}>Enroll Now</button>}
             </div>
         </div>
     </div>
