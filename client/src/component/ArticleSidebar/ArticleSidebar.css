@@ -1,5 +1,5 @@
 .article-sidebar-container{
-    height: 100vh;
+    height: 100%;
     border-right: 1px solid #dcdcdc;
     overflow-y: scroll;
     scrollbar-width: none; 
