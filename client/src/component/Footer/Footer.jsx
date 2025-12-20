@@ -24,7 +24,7 @@ const Footer = () => {
       <div className="feedback-section">
         <p>Please leave a feedback for us</p>
         <textarea type="text" placeholder='Feedback here...' />
-        <button>Feedback</button>
+        <Link to="/review"><button>Feedback</button></Link>
       </div>
       
     </div>

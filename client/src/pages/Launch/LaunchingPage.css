@@ -1,0 +1,10 @@
+.launchingPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+.launchingPage p{
+    font-size: 20px;
+    font-weight: 500;
+}
