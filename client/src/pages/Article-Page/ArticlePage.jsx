@@ -8,7 +8,6 @@ const ArticlePage = () => {
   const { courseId } = useParams();
   const [article, setArticle] = useState("");
 
-  console.log(article.content)
   return (
     <div className="article-page">
       <div className="article-sidebar">
