@@ -39,7 +39,7 @@ const CourseList = () => {
   return (
     <div className='course-list'>
       <div className='search-section'>
-        <span><Link to={"/"}>< FaHome size={28}/></Link> <span>/</span> <span>Course-list</span></span>
+        <span className='course-info-breadCrumb'><Link to={"/"} className='bread-crumb-link'>< FaHome size={28}/></Link><span>/</span> <span>Course-list</span></span>
         <div className='course-list-input'>
           <input type="text"  placeholder='Enter the course name' value={query} onChange={(e)=> { setQuery(e.target.value) }}/>
           <button>Search</button>
