@@ -12,7 +12,7 @@ const CourseList = () => {
  
  const [ searchParams ] = useSearchParams();
  useEffect(()=>{
-  const search = searchParams.get("search");
+  const search = searchParams.get("search") || "";
   setQuery(search);
  }, [searchParams])
 
@@ -48,7 +48,7 @@ const CourseList = () => {
 
       <div className="all-course">
         {
-          courseData?.filter((course) => course?.courseTitle.toLowerCase().replace(/\s+/g, "").includes(query.toLowerCase().replace(/\s+/g, ""))).map((course)=>{
+          courseData?.filter((course) => course?.courseTitle?.toLowerCase().replace(/\s+/g, "").includes(query?.toLowerCase().replace(/\s+/g, ""))).map((course)=>{
            return <CourseCard courseTitle={course.courseTitle} courseOwner={course.createdBy.username} 
             createdAt={course.createdAt} courseId={course._id} courseImage={course.courseThumbnail}
             key={course._id}/>
