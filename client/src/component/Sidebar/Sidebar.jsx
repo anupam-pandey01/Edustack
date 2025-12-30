@@ -7,8 +7,8 @@ import { Link } from 'react-router';
 import { IoCloseSharp } from "react-icons/io5";
 import { useAuth } from '../../AuthContext';
 
-const Sidebar = ({setMenu, setOpen, open, userId}) => {
-  const {mobileMenu, setmobileMenu} = useAuth()
+const Sidebar = ({setMenu, setOpen, open, userId, dashboardMenu, setDashboardMenu}) => {
+  
   return (
     <>
       <aside id={open?'sidebar':'sidebar-small'}>
@@ -29,8 +29,8 @@ const Sidebar = ({setMenu, setOpen, open, userId}) => {
           </Link>
         </aside>
 
-        {mobileMenu ?  <></> : <div className="mobile-side-bar">
-          <IoCloseSharp size={30} className="sidebar-closer" onClick={()=> setmobileMenu(!mobileMenu)}/>
+        {dashboardMenu ? <div className="mobile-side-bar">
+          <IoCloseSharp size={30} className="sidebar-closer" onClick={()=> setDashboardMenu(false)}/>
           <Link to={`/educator/${userId}`} className={open?"sidebar-brand":"sidebar-brand-small"} onClick={()=>setMenu("dashboard")}>
             <FaHome size={27}/>  <span className={open?"":"sidebar-item"}> DASHBOARD</span>
           </Link>
@@ -43,7 +43,7 @@ const Sidebar = ({setMenu, setOpen, open, userId}) => {
           <Link to={`/educator/${userId}`} className={open?"sidebar-brand":"sidebar-brand-small"} onClick={()=>setMenu("enrolledstudent")}>
             <FaUser size={27}/> <span className={open?"":"sidebar-item"}>ENROLLED STUDENT</span>
           </Link>
-        </div>}
+        </div>: <></>}
       </>
   )
 }

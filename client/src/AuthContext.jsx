@@ -10,7 +10,6 @@ export const useAuth = ()=>{
 export const AuthProvider = ({children})=>{
     const [currentUser, setCurrentUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [mobileMenu, setmobileMenu] = useState(true);
 
     useEffect(()=>{
         const userId = localStorage.getItem('userId');
@@ -27,8 +26,6 @@ export const AuthProvider = ({children})=>{
         setCurrentUser,
         isLoggedIn, 
         setIsLoggedIn,
-        mobileMenu, 
-        setmobileMenu
     }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

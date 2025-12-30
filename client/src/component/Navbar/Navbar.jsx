@@ -6,9 +6,9 @@ import userIcon from "../../assets/userIcon.png"
 import { useAuth } from '../../AuthContext'
 import { GiHamburgerMenu } from "react-icons/gi";
 
-const Navbar = ({isDashboard, setIsDashboard}) => {
+const Navbar = () => {
   const navigate = useNavigate();
-  const { currentUser, isLoggedIn, setCurrentUser, setIsLoggedIn,  mobileMenu, setmobileMenu } = useAuth();
+  const { currentUser, isLoggedIn, setCurrentUser, setIsLoggedIn } = useAuth();
   
 
   function handleLogout(){
@@ -26,8 +26,7 @@ const Navbar = ({isDashboard, setIsDashboard}) => {
   return (
     <div className='navbar'>
       <div className='brand-group'>
-        {isDashboard && mobileMenu ? <GiHamburgerMenu size={30} onClick={()=> setmobileMenu(!mobileMenu)} className='mobile-humburger'/>: <></>}
-        <Link to={`/`} className='brand' onClick={()=> setIsDashboard(false)}>
+        <Link to={`/`} className='brand'>
           <img src={logo} alt="" className='logo'/>
           <span>EduStack</span>
         </Link>

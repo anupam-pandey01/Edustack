@@ -19,12 +19,11 @@ import ContactUs from './pages/ContactUs/ContactUs'
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy'
 
 const App = () => {
-  const [isDashboard, setIsDashboard] = useState(false);
   const { isLoggedIn } = useAuth();
 
   return (
     <div className='app'>
-      <Navbar isDashboard={isDashboard} setIsDashboard={setIsDashboard}/>
+      <Navbar />
       <Routes>
         {/* Public Route */}
         <Route path='/auth' element={isLoggedIn ? <Navigate to="/" replace/> :<Auth/>}/>
