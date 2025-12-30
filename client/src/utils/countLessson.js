@@ -1,6 +1,5 @@
 export function countLesson(chapters){
     if(!chapters) return;
-    console.log(chapters)
     let count = 0
 
     for(let chapter of chapters ){
