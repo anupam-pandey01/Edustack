@@ -6,7 +6,7 @@
     border-right: 1px solid #dcdcdc;
     transition: 0.3s, ease-out;
 }
-#sidebar-small{
+/* #sidebar-small{
     padding-top: 2rem;
     display: flex;
     flex-direction: column;
@@ -15,20 +15,18 @@
     border-right: 1px solid #dcdcdc;
     width: 100px;
     transition: 0.3s, ease-in;
-}
-.sidebar-item{
-    display: none;
-}
-.sidebar-brand-small{
+} */
+
+/* .sidebar-brand-small{
     padding: 15px 16%;
     display: flex;
     align-items: center;
     gap: 20px;
     cursor: pointer;
-}
-.sidebar-brand-small:hover{
+} */
+/* .sidebar-brand-small:hover{
     background-color: #7e9df143;;
-}
+} */
 .sidebar-brand{
     padding: 15px 16%;
     display: flex;

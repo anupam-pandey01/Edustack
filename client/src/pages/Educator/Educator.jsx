@@ -13,7 +13,6 @@ import { IoClose } from "react-icons/io5";
 const Educator = () => {
   const [menu, setMenu] = useState("dashboard");
   const [dashboardMenu, setDashboardMenu] = useState(false);
-  const [open, setOpen] = useState(true);
 
   const {lessonId} = useParams()
   const {userId} = useParams();
@@ -28,7 +27,7 @@ const Educator = () => {
   return (
     <div className={open?'educator-dashboard':"educator-dashboard-large"}>
       <div className='educator-humburger-menu' onClick={()=>setDashboardMenu(true)}><RiMenuFold2Line size={30}/></div>
-      <Sidebar setMenu={setMenu} setOpen={setOpen} open={open} userId={userId} dashboardMenu={dashboardMenu} setDashboardMenu={setDashboardMenu}/>
+      <Sidebar setMenu={setMenu} userId={userId} dashboardMenu={dashboardMenu} setDashboardMenu={setDashboardMenu}/>
       <main onClick={()=> setDashboardMenu(false)}>
         {menu=="dashboard" &&  <Dashboard userId={userId}/>}
         {menu=="addcourse" &&  <AddCourse setMenu={setMenu}/>}
