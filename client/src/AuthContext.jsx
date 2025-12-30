@@ -11,14 +11,14 @@ export const AuthProvider = ({children})=>{
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [mobileMenu, setmobileMenu] = useState(true);
 
-    useEffect(()=>{
-        const userId = localStorage.getItem('userId');
-        const token = localStorage.getItem("token")
-        if(userId && token){
-            setCurrentUser(userId);
-            setIsLoggedIn(true)
-        }
-    }, []);
+    // useEffect(()=>{
+    //     const userId = localStorage.getItem('userId');
+    //     const token = localStorage.getItem("token")
+    //     if(userId && token){
+    //         setCurrentUser(userId);
+    //         setIsLoggedIn(true)
+    //     }
+    // }, []);
 
     const value = {
         currentUser, 

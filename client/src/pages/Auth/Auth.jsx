@@ -30,15 +30,15 @@ const Auth = () => {
     setAuthData(copyAuthData);
   }
 
-  // Function for form submit
+  // Function for form submit ( SIGN-UP and LOG-IN STATE )
   async function handleSubmit(e){
-    // Sign up state
     if(authState === "Sign up"){
       const {success, message, token, userId} = await signupHandleSubmit(e, authData);
       if(success){
         localStorage.setItem("token", token);
         localStorage.setItem("userId", userId);
         setIsLoggedIn(true);
+        setCurrentUser(userId)
         setTimeout(()=>{
           handleSuccess(message);
         }, 2000)
@@ -56,10 +56,10 @@ const Auth = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("userId", userId);
         setIsLoggedIn(true);
+        setCurrentUser(userId)
         handleSuccess(message);
         setTimeout(()=>{
           navigate("/");
-          // window.location.reload();
         }, 2000)
         
       }else{

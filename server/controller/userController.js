@@ -24,13 +24,13 @@ async function registerUser(req, res){
             role
         });
 
-        const userId = await newUser.save();
-        const token = jwt.sign({id: userId}, process.env.SECRET_KEY, {expiresIn: "24h"})
+        const user = await newUser.save();
+        const token = jwt.sign({id: user._id}, process.env.SECRET_KEY, {expiresIn: "24h"})
         return res.status(200).json({
             success: true,
             message: "User registered successfully!",
             token,
-            userId
+            userId: user._id
         })
     }catch(err){
         res.status(500).json({
