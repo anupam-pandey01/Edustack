@@ -20,6 +20,7 @@ const CourseDescription = () => {
     const navigate = useNavigate();
 
     const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token")
  
 // Get Description Data from server
   useEffect(()=>{
