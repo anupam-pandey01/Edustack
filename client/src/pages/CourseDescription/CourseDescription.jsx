@@ -8,6 +8,7 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { IoIosArrowDropupCircle } from "react-icons/io";
 import { handleError, handleSuccess } from '../../utils/handler';
 import { checkToken } from '../../utils/checkToken';
+import { countLesson } from '../../utils/countLessson';
 
 const CourseDescription = () => {
     const [data, setData] = useState({});
@@ -103,6 +104,9 @@ const CourseDescription = () => {
                 <div className='course-info-middle'>
                     <h3>Course Structure</h3>
                     {data?.chapters?.map((chapter, i)=>(
+
+                        chapter.lessons.length != 0 
+                        && 
                         <div className='course-info-chapter' key={i}>
                             <div className='chapter-info-accordion' onClick={()=> handleAccordion(i)}>
                                 <p>{chapter.chapterTitle}</p>
@@ -113,7 +117,8 @@ const CourseDescription = () => {
                                 selected == i 
                                 ? 
                             chapter?.lessons.map((lesson, idx)=>(
-                                    <div className='course-info-lesson'>
+                                    lesson.content &&
+                                    <div className='course-info-lesson' key={idx}>
                                         <p>{lesson.lessonTitle}</p>
                                     </div>
                             ))
@@ -140,7 +145,7 @@ const CourseDescription = () => {
                     <p className='enrolled-card-chapter '><FaBook />{data?.chapters?.length} Chapter</p>
                     <span>|</span>
                     <p className='enrolled-card-lesson'><FaPencilAlt /> 
-                    4 lesson
+                    {countLesson(data?.chapters)}
                     </p>
                 </div>
                 {userEnrolled ? <Link className='enrolled-card-button' to={`/course-list/article/${courseId}`}>Continue</Link> : <button className='enrolled-card-button' onClick={()=>handleEnrollment(data?.createdBy._id, data.courseTitle)}>Enroll Now</button>}
