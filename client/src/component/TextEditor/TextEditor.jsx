@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import "./TextEditor.css"
 import JoditEditor from 'jodit-react';
 import { checkToken } from '../../utils/checkToken';
 import { handleError, handleSuccess } from "../../utils/handler"
@@ -88,12 +89,14 @@ const TextEditor = ({ courseId, chapterTitle, lessonId, setMenu }) => {
         value={initialContent}
         config={{
           height: 500,
+          toolbarAdaptive: false,
+          toolbarSticky: true,
           buttons: [
             "bold", "italic", "underline", "|",
             'ul', 'ol', '|',
             "font", "fontsize", "paragraph", "|",
             "image","video","link", "|",
-            "align", "undo", "redo", "preview"
+            "align", "undo", "redo",
           ],
         }}
         onChange={(html) => setContent(html)} // typing stays smooth

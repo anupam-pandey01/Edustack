@@ -1,0 +1,83 @@
+/* ===== JODIT EDITOR CONTENT ===== */
+.jodit-wysiwyg {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #1f2937;
+  padding: 16px;
+}
+
+/* Paragraphs */
+.jodit-wysiwyg p {
+  margin: 0 0 14px;
+}
+
+/* Headings */
+.jodit-wysiwyg h1,
+.jodit-wysiwyg h2,
+.jodit-wysiwyg h3 {
+  margin: 20px 0 10px;
+  font-weight: 600;
+}
+
+/* Lists */
+.jodit-wysiwyg ul,
+.jodit-wysiwyg ol {
+  padding-left: 24px;
+  margin-bottom: 14px;
+}
+
+.jodit-wysiwyg li {
+  margin-bottom: 6px;
+}
+
+/* Code block */
+.jodit-wysiwyg pre {
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 14px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+}
+
+.jodit-wysiwyg code {
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Images */
+.jodit-wysiwyg img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 12px auto;
+  border-radius: 10px;
+}
+
+/* Videos / iframe */
+.jodit-wysiwyg iframe,
+.jodit-wysiwyg video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  margin: 16px 0;
+}
+
+/* Blockquote */
+.jodit-wysiwyg blockquote {
+  border-left: 4px solid #3b82f6;
+  padding-left: 14px;
+  color: #475569;
+  margin: 14px 0;
+  font-style: italic;
+}
+
+.jodit-wysiwyg a{
+    color: #3b82f6;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
