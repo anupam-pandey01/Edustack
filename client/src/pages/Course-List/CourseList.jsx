@@ -48,11 +48,11 @@ const CourseList = () => {
 
       <div className="all-course">
         {
-          courseData?.filter((course) => course?.courseTitle?.toLowerCase().replace(/\s+/g, "").includes(query?.toLowerCase().replace(/\s+/g, ""))).map((course)=>{
-           return <CourseCard courseTitle={course.courseTitle} courseOwner={course.createdBy.username} 
+          courseData?.filter((course) =>  course.chapters.length && course?.courseTitle?.toLowerCase().replace(/\s+/g, "").includes(query?.toLowerCase().replace(/\s+/g, ""))).map((course)=>( 
+            <CourseCard courseTitle={course.courseTitle} courseOwner={course.createdBy.username} 
             createdAt={course.createdAt} courseId={course._id} courseImage={course.courseThumbnail}
             key={course._id}/>
-          })
+          ))
         }
         
       </div>
