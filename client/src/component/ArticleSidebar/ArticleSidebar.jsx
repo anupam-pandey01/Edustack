@@ -3,8 +3,11 @@ import "./ArticleSidebar.css"
 import { checkToken } from '../../utils/checkToken';
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { handleError } from '../../utils/handler';
+import { RiMenuFold2Line } from "react-icons/ri";
+import { IoClose } from "react-icons/io5";
 
-const ArticleSidebar = ({ courseId, setArticle }) => {
+
+const ArticleSidebar = ({ courseId, setArticle, openMobileSidebar, setOpenMobileSidebar }) => {
     const [lessonSet, setLessonSet] = useState(new Set());
     const [data, setData] = useState({});
     const token = localStorage.getItem("token");
@@ -74,35 +77,70 @@ const ArticleSidebar = ({ courseId, setArticle }) => {
     
 
   return (
-    <div className='article-sidebar-container'>
-        <h3>{data?.courseTitle?.split(" ").slice(0, 4).join(" ") + "..."}</h3>
-      <div className='article-sidebar'>
-            {data.chapters?.filter((chapter) => chapter.lessons.some(lesson => lesson.content))
-            .map((chapter, idx)=>(
-                <div className="chapter-container" >
-                    <div className="chapter" onClick={ ()=> {
-                        handleLesson(idx)
-                        const lessonId = chapter.lessons.find(lesson => lesson.content)
-                        selectContent(chapter._id, lessonId._id)
-                    }}>
-                        <span>{chapter?.chapterTitle}</span>
-                        { lessonSet.has(idx) ? <IoIosArrowUp size={24}/>  : <IoIosArrowDown size={24}/> }   
-                    </div>
-                    {
-                        lessonSet.has(idx)
-                        && 
-                        (<div className='lesson-container'>
-                            {chapter?.lessons?.map((lesson)=>(
-                                lesson.content 
-                                && 
-                                (< div className='lesson' onClick={ ()=>selectContent(chapter._id, lesson._id) }>{lesson?.lessonTitle}</div> )
-                            ))}
-                        </div>)
-                    }
-                </div> 
-            ))}
+    <div className="article-sidebar-main">
+        <div className='article-sidebar-container'>
             
-      </div>
+            <h3>{data?.courseTitle?.split(" ").slice(0, 4).join(" ") + "..."}</h3>
+            <div className='article-sidebar'>
+                    {data.chapters?.filter((chapter) => chapter.lessons.some(lesson => lesson.content))
+                    .map((chapter, idx)=>(
+                        <div className="chapter-container" >
+                            <div className="chapter" onClick={ ()=> {
+                                handleLesson(idx)
+                                const lessonId = chapter.lessons.find(lesson => lesson.content)
+                                selectContent(chapter._id, lessonId._id)
+                            }}>
+                                <span>{chapter?.chapterTitle}</span>
+                                { lessonSet.has(idx) ? <IoIosArrowUp size={24}/>  : <IoIosArrowDown size={24}/> }   
+                            </div>
+                            {
+                                lessonSet.has(idx)
+                                && 
+                                (<div className='lesson-container'>
+                                    {chapter?.lessons?.map((lesson)=>(
+                                        lesson.content 
+                                        && 
+                                        (< div className='lesson' onClick={ ()=>selectContent(chapter._id, lesson._id) }>{lesson?.lessonTitle}</div> )
+                                    ))}
+                                </div>)
+                            }
+                        </div> 
+                    ))}
+                    
+            </div>
+        </div>
+        {openMobileSidebar ? 
+        <div className="mobile-article-sidebar">
+            <IoClose size={36}  style={{position: "absolute", left:"240px", top:"4px", textDecoration: "bold", cursor: "pointer"}} onClick={()=>setOpenMobileSidebar(false)}/>
+            <h3>{data?.courseTitle?.split(" ").slice(0, 4).join(" ") + "..."}</h3>
+            <div className='article-sidebar'>
+                    {data.chapters?.filter((chapter) => chapter.lessons.some(lesson => lesson.content))
+                    .map((chapter, idx)=>(
+                        <div className="chapter-container" >
+                            <div className="chapter" onClick={ ()=> {
+                                handleLesson(idx)
+                                const lessonId = chapter.lessons.find(lesson => lesson.content)
+                                selectContent(chapter._id, lessonId._id)
+                            }}>
+                                <span>{chapter?.chapterTitle}</span>
+                                { lessonSet.has(idx) ? <IoIosArrowUp size={24}/>  : <IoIosArrowDown size={24}/> }   
+                            </div>
+                            {
+                                lessonSet.has(idx)
+                                && 
+                                (<div className='lesson-container'>
+                                    {chapter?.lessons?.map((lesson)=>(
+                                        lesson.content 
+                                        && 
+                                        (< div className='lesson' onClick={ ()=>selectContent(chapter._id, lesson._id) }>{lesson?.lessonTitle}</div> )
+                                    ))}
+                                </div>)
+                            }
+                        </div> 
+                    ))}
+                    
+            </div>
+        </div>: <div className='hamburgear-menu' onClick={() => setOpenMobileSidebar(true)}><RiMenuFold2Line size={30}/></div> }  
     </div>
   )
 }

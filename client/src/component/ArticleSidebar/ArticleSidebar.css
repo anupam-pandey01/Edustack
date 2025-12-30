@@ -1,3 +1,7 @@
+.article-sidebar-main{
+    height: 100%;
+    position: relative;
+}
 .article-sidebar-container{
     height: 100%;
     border-right: 1px solid #dcdcdc;
@@ -53,4 +57,49 @@
 .chapter-container .lesson:hover{
     background-color: #7e9df143;
     /* border-right: 5px solid #0e4af0; */
+}
+
+.mobile-article-sidebar{
+    display: none;
+}
+
+.hamburgear-menu{
+    display: none;
+}
+
+@media(max-width: 1024px){
+    .mobile-article-sidebar{
+        display: block;
+        width: 280px;
+        position: absolute;
+        background-color: #fff;
+        height: 100%;
+        border-right: 1px solid #dcdcdc;
+        overflow-y: scroll;
+        scrollbar-width: none; 
+        /* padding: 20px 0; */
+    }
+    .mobile-article-sidebar h3{
+        padding: 10px 20px;
+        font-size: 18px;
+        font-weight: 450;
+        border-bottom: 1px solid #cdcccc;
+    }
+    .article-sidebar-container{
+        display: none;
+    }
+
+    .hamburgear-menu{
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 6px; 
+        left: 5px;
+        background: #fff; 
+        border: 1px solid #cdcccc; 
+        border-radius: 5px;
+        padding: 8px 6px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        cursor: pointer;
+    }
 }

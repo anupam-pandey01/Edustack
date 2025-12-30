@@ -7,14 +7,15 @@ import DOMPurify from "dompurify";
 const ArticlePage = () => {
   const { courseId } = useParams();
   const [article, setArticle] = useState("");
+  const [openMobileSidebar, setOpenMobileSidebar] = useState(false)
 
   return (
     <div className="article-page">
       <div className="article-sidebar">
-        <ArticleSidebar courseId={courseId} setArticle={setArticle} />
+        <ArticleSidebar courseId={courseId} setArticle={setArticle} openMobileSidebar={openMobileSidebar} setOpenMobileSidebar={setOpenMobileSidebar}/>
       </div>
 
-      <div className='aritcle-container'>
+      <div className='aritcle-container' onClick={() => setOpenMobileSidebar(false)}>
         <h2 className='aritcleLesson'>{article.lessonTitle}</h2>
         
         <div
