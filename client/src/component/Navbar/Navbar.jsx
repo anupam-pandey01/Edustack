@@ -37,7 +37,7 @@ const Navbar = () => {
           <div>
             <img src={userIcon} alt="icon" className='user-logo' />
             <div className="dropdown">
-              <Link to={`/educator/${currentUser}`}><p className='dropdown-dashboard' onClick={()=> setIsDashboard(true)}>Dashboard</p></Link>
+              <Link to={`/educator/${currentUser}`}><p className='dropdown-dashboard' >Dashboard</p></Link>
               <Link to={`/enrollment/${currentUser}`}><p className='dropdown-enroll' >My Enrollment</p></Link>
               <p onClick={ handleLogout } className='dropdown-logout'>Log out</p>
             </div>
