@@ -103,26 +103,23 @@ const CourseDescription = () => {
 
                 <div className='course-info-middle'>
                     <h3>Course Structure</h3>
-                    {data?.chapters?.map((chapter, i)=>(
-
+                    {data.chapters?.filter(chapter => chapter.lessons.some(lesson => lesson.content))
+                      .map((chapter, i)=>(
                         chapter.lessons.length != 0 
                         && 
                         <div className='course-info-chapter' key={i}>
                             <div className='chapter-info-accordion' onClick={()=> handleAccordion(i)}>
                                 <p>{chapter.chapterTitle}</p>
-                                {selected == i ? <IoIosArrowDropdownCircle size={24}/> : <IoIosArrowDropupCircle size={24}/>}
-                                
+                                {selected == i ? <IoIosArrowDropdownCircle size={24}/> : <IoIosArrowDropupCircle size={24}/>}  
                             </div>
-                            {
-                                selected == i 
-                                ? 
-                            chapter?.lessons.map((lesson, idx)=>(
-                                    lesson.content &&
-                                    <div className='course-info-lesson' key={idx}>
+
+                            { selected == i ? 
+                                chapter?.lessons.map((lesson, idx)=>(
+                                    lesson.content && (<div className='course-info-lesson' key={idx}>
                                         <p>{lesson.lessonTitle}</p>
-                                    </div>
-                            ))
-                                :
+                                    </div>)
+                                ))
+                                 :
                                 <></>
                             } 
                         </div>   

@@ -41,7 +41,11 @@ const Home = () => {
         <p className='subheading'>Start your journey with the courses learners love the most.</p>
         <div className="course">
           {
-            courseData.map((course)=>{
+            courseData.filter(course => course.chapters.some(chapter => // Filter course based on the some function
+              chapter.lessons.some(lesson => 
+                lesson.content && lesson.content.trim() !== "" // check that course must have at least one lesson which have content
+            )))
+            .map((course)=>{
               return <CourseCard courseTitle={course.courseTitle} courseOwner={course.createdBy.username} createdAt={course.createdAt} courseId={course._id} courseImage={course.courseThumbnail}/>
             })
           }
