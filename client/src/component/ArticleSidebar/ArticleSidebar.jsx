@@ -73,28 +73,20 @@ const ArticleSidebar = ({ courseId, setArticle }) => {
     }
     
 
-    
-
-
   return (
     <div className='article-sidebar-container'>
         <h3>{data?.courseTitle?.split(" ").slice(0, 4).join(" ") + "..."}</h3>
       <div className='article-sidebar'>
-            {data?.chapters?.map((chapter, idx)=>(
-                chapter.lessons.length != 0 
-                && 
-                chapter.lessons[0].content 
-                && 
-
-                ( <div className="chapter-container" >
+            {data.chapters?.filter((chapter) => chapter.lessons.some(lesson => lesson.content))
+            .map((chapter, idx)=>(
+                <div className="chapter-container" >
                     <div className="chapter" onClick={ ()=> {
                         handleLesson(idx)
-                        selectContent(chapter._id, chapter.lessons[0]._id)
+                        const lessonId = chapter.lessons.find(lesson => lesson.content)
+                        selectContent(chapter._id, lessonId._id)
                     }}>
                         <span>{chapter?.chapterTitle}</span>
-                        {
-                           lessonSet.has(idx) ? <IoIosArrowUp size={24}/>  : <IoIosArrowDown size={24}/>
-                        }   
+                        { lessonSet.has(idx) ? <IoIosArrowUp size={24}/>  : <IoIosArrowDown size={24}/> }   
                     </div>
                     {
                         lessonSet.has(idx)
@@ -107,8 +99,7 @@ const ArticleSidebar = ({ courseId, setArticle }) => {
                             ))}
                         </div>)
                     }
-                    
-                </div> )
+                </div> 
             ))}
             
       </div>
