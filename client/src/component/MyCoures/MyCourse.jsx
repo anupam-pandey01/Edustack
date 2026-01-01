@@ -11,7 +11,7 @@ import { MdModeEdit } from "react-icons/md"
 import { IoMdAdd } from "react-icons/io"
 import AddNewChapter from '../AddNewChapter/AddNewChapter'
 import { checkToken } from '../../utils/checkToken'
-import { ToastContainer } from 'react-toastify'
+
 
 
 const MyCourse = ({userId, courseId, setMenu}) => {
@@ -70,6 +70,33 @@ const MyCourse = ({userId, courseId, setMenu}) => {
     }
   }
 
+// Handling  DELETE LESSON
+const handleDeleteLesson = async(chapterTitle, lessonId)=>{
+  try{
+    const url = `${import.meta.env.VITE_BASE_URL}/deleteLesson/${courseId}/${lessonId}?chapterTitle=${chapterTitle}`;
+    const res = await fetch(url, {
+      method: "DELETE", 
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+    });
+    if(res.status == 401){
+      checkToken("Token Expired");
+    }
+    const { updatedCourse, message, success } = await res.json()
+    if(success){
+      setCourseData(updatedCourse);
+      handleSuccess(message);
+    }else{
+      handleError(message)
+    }
+  }catch(err){
+    console.log(err)
+    handleError(err);
+  }
+}
+
 // Handling the Add New Lesson
   const handleAddNewLesson = async (chapterTitle)=>{
     const url = `${import.meta.env.VITE_BASE_URL}/lesson/new/${userId}/${courseId}?chapterTitle=${chapterTitle}`;
@@ -124,6 +151,7 @@ const MyCourse = ({userId, courseId, setMenu}) => {
   }, [userId]);
 
 
+
   return (
     <div className='mycourse'>
       <h1>My Courses</h1>
@@ -172,7 +200,7 @@ const MyCourse = ({userId, courseId, setMenu}) => {
                           <p>{lesson.lessonTitle}</p>
                           <div className='lesson-btn'>
                             <Link to={`/educator/${userId}/c/${course?._id}/${lesson?._id}?chapterTitle=${chapter?.chapterTitle}`}> <button className="update" onClick={()=> setMenu("texteditor")}>Update</button></Link>
-                            <button className="delete">Delete</button>
+                            <button className="delete" onClick={()=> handleDeleteLesson(chapter?.chapterTitle, lesson._id?.toString())}>Delete</button>
                           </div>
                         </div>
                       ))}
