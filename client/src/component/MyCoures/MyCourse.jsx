@@ -137,8 +137,14 @@ const handleDeleteLesson = async(chapterTitle, lessonId)=>{
         if(response.status == 401){
           checkToken("Token Expired");
         }
-        const data = await response.json();
-        setCourseData(data)
+        const {data, message, success} = await response.json();
+        if(success){
+          setCourseData(data)
+        }else{
+          handleError("You have not created any course");
+          setMenu('addcourse')
+        }
+        
         // setIsLoading(false)
 
       }catch(err){
