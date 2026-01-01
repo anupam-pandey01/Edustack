@@ -117,7 +117,7 @@ const getCourseData = async (req, res)=>{
     const {userId} = req.params;
     const courseData = await Course.find({createdBy: userId});
     if(!courseData || courseData.length == 0){
-      return res.status(200).json({message: "No course found for this educator", success: false})
+      return res.status(404).json({message: "No course found for this educator", success: false})
     }
     res.status(200).json(courseData)
   }catch(err){
