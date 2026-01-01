@@ -1,6 +1,6 @@
 const express = require("express");
 const educatorRouter = express.Router();
-const { uploadCourseData, getCourseData, addChapter, addLesson, saveLessonContent, fecthLessonContent, enrolledStudent, deleteCourse, getHtml, saveHtml } = require("../controller/educatorController");
+const { uploadCourseData, getCourseData, addChapter, addLesson, saveLessonContent, fecthLessonContent, enrolledStudent, deleteCourse, getHtml, saveHtml, deleteLesson } = require("../controller/educatorController");
 const upload = require("../Middleware/multer");
 const auth = require("../Middleware/Auth");
 
@@ -14,6 +14,7 @@ educatorRouter.post("/chapter/new/:courseId", auth, addChapter);
 educatorRouter.post("/lesson/new/:userId/:courseId",auth,  addLesson);
 educatorRouter.post("/lesson/:courseId/:lessonId",auth,  saveLessonContent);
 educatorRouter.get("/lesson/fetch/:courseId/:lessonId",auth, fecthLessonContent);
+educatorRouter.delete("/deleteLesson/:courseId/:lessonId", deleteLesson);
 educatorRouter.post('/student/enrolled',auth, enrolledStudent);
 educatorRouter.get("/getHtml/:courseId/:lessonId",auth, getHtml);
 educatorRouter.put("/saveHtml/:courseId/:lessonId",auth, saveHtml);

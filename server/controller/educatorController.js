@@ -348,16 +348,30 @@ const saveHtml = async(req, res)=>{
   }
 }
 
-const addHtml = async function(req, res){
-  const { html } = req.body;
-  const { courseId, lessonId, chapterTitle} = req.params;
+const deleteLesson = async(req, res)=>{
+    const { courseId, lessonId } = req.params;
+    const { chapterTitle } = req.query;
 
-  try{
+    try{
+      const course = await Course.findById(courseId);
+      if(!course){
+        return res.status(404).message("Course not found");
+      }
+      const chapter = course.chapters.find(chapter => chapter.chapterTitle == chapterTitle);
+      const lessonIndex = chapter.lessons.findIndex(lesson => lesson._id.toString() == lessonId);
 
-  }catch(err){
-    console.log(err);
-    return res.status(500).json({message: "Server Error", success: false});
-  }
+      if(lessonIndex === -1){
+        return res.status(404).json({ message: "Lesson not found" });
+      }
+
+      const lesson = chapter.lessons.splice(lessonIndex, 1);
+      const result = await course.save();
+      const updatedCourse = await Course.find({createdBy: course.createdBy});
+      res.status(200).json({message: `${lesson[0].lessonTitle} Delete Successfully`, success: true, updatedCourse})
+    }catch(err){
+      console.log(err);
+      res.status(500).json({ message:"Server Error", success: false})
+    }
 }
 
 module.exports = { 
@@ -370,5 +384,6 @@ module.exports = {
     enrolledStudent, 
     deleteCourse, 
     getHtml,
-    saveHtml
+    saveHtml, 
+    deleteLesson
   }
