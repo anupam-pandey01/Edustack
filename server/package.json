@@ -9,7 +9,7 @@
     "dev": "nodemon server.js"
   },
   "author": "Anupam Pandey",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.7.0",
@@ -18,8 +18,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.17.1",
-    "multer": "^2.0.2",
-    "paypal-rest-sdk": "^1.8.1"
+    "multer": "^2.0.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
