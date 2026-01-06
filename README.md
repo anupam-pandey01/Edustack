@@ -58,7 +58,7 @@ EduStack is a full-featured Learning Management System designed to help educator
 git clone https://github.com/YOUR_GITHUB/EduStack.git
 cd EduStack
 ```
-# Add MongoDB URI, JWT_SECRET, CLOUDINARY details
+### Add MongoDB URI, JWT_SECRET, CLOUDINARY details
 ```bash
 cd server
 npm install
@@ -66,7 +66,7 @@ cp .env.example
 npm run dev
 ```
 
-# Add VITE_BASE_URL=http://localhost:5000/
+### Add VITE_BASE_URL=http://localhost:5000/
 ```bash
 cd client
 npm install
