@@ -5,9 +5,11 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { handleError } from '../../utils/handler'
 import { useParams, useNavigate } from 'react-router'
+import Spinner from '../../component/Spinner/spinner'
 
 const MyEnrollment = () => {
   const [enrolledcourse, setEnrolledCourse] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { userId } = useParams();
 
   const navigate = useNavigate()
@@ -15,6 +17,7 @@ const MyEnrollment = () => {
   useEffect(()=>{
     async function getMyEnrollment(){
       const token = localStorage.getItem("token");
+      setIsLoading(true)
       try{
         const url = `${import.meta.env.VITE_BASE_URL}/myEnrollment/${userId}`;
         const res = await fetch(url, {
@@ -31,6 +34,7 @@ const MyEnrollment = () => {
 
         const { enrolledcourse } = await res.json()
         setEnrolledCourse(enrolledcourse);
+        setIsLoading(false)
       }catch(err){
         console.log(err);
         handleError(err);
@@ -41,6 +45,7 @@ const MyEnrollment = () => {
   return (
     <div className='my-enrollment'>
       <h1>My Enrollment</h1>
+      {isLoading ? <Spinner/>: <></>}
       {enrolledcourse?.map((course)=>(
         <div className='my-enrollment-container' key={course?._id}>
           <div className="my-enrollment-card">

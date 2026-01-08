@@ -6,6 +6,7 @@ let override = {
   alignItems: "center",
   justifyContent: "center",
   position: "absolute",
+  marginTop: "40px",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
