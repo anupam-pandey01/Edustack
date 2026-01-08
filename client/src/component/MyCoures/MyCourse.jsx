@@ -145,7 +145,7 @@ const handleDeleteLesson = async(chapterTitle, lessonId)=>{
           setMenu('addcourse')
         }
         
-        // setIsLoading(false)
+        setIsLoading(false)
 
       }catch(err){
         console.error("Educator: Error during the fetching course data", err);
@@ -162,6 +162,7 @@ const handleDeleteLesson = async(chapterTitle, lessonId)=>{
     <div className='mycourse'>
       <h1>My Courses</h1>
       <div className="mycourse-section">
+        {isloading ? <Spinner isloading={isloading}/>: <></>}
         {popOpen ?<AddNewChapter courseId={courseId} setCourseData={setCourseData} setPopOpen={setPopOpen}/>: <></> }
         {courseData.map((course)=>(
             <div  className='mycourse-container' key={course._id}>

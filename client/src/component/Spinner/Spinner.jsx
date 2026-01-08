@@ -2,12 +2,13 @@
 import { BeatLoader } from "react-spinners";
 
 let override = {
-  height: "100vh",
   display: "flex",
-  align: "center",
+  alignItems: "center",
   justifyContent: "center",
-  borderColor: "red",
-  marginTop: "100px" 
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
 };
 
 // CSSProperties = override
@@ -16,7 +17,7 @@ const Spinner = ({isloading}) => {
   return (
     <div>
       <BeatLoader 
-        color={"#2e2e2fff"}
+        color={"#6565feff"}
         loading={isloading}
         cssOverride={override}
         size={15}
