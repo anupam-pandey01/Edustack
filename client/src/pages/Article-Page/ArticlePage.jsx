@@ -3,6 +3,7 @@ import "./ArticlePage.css";
 import ArticleSidebar from '../../component/ArticleSidebar/ArticleSidebar';
 import { useParams } from 'react-router';
 import DOMPurify from "dompurify";
+import Spinner from '../../component/Spinner/spinner';
 
 const ArticlePage = () => {
   const { courseId } = useParams();
@@ -16,6 +17,7 @@ const ArticlePage = () => {
       </div>
 
       <div className='aritcle-container' onClick={() => setOpenMobileSidebar(false)}>
+        {article ? <></>: <Spinner/>}
         <h2 className='aritcleLesson'>{article.lessonTitle}</h2>
         
         <div
