@@ -5,10 +5,13 @@ import { Rating } from "react-simple-star-rating"
 import { FaHome } from "react-icons/fa";
 import CourseCard from '../../component/CourseCard/CourseCard'
 import { Link, useSearchParams } from 'react-router'
+import Spinner from '../../component/Spinner/spinner';
 
 const CourseList = () => {
  const [courseData, setCourseData] = useState([]);
  const [query, setQuery] = useState("");
+ const [isLoading, setIsLoading] = useState(false);
+
  
  const [ searchParams ] = useSearchParams();
  useEffect(()=>{
@@ -19,6 +22,7 @@ const CourseList = () => {
  
  useEffect(()=>{
   const getCourseData = async ()=>{
+    setIsLoading(true)
     try{
       const url = `${import.meta.env.VITE_BASE_URL}/course/list`
       const res = await fetch(url, {
@@ -26,6 +30,7 @@ const CourseList = () => {
       });
 
       const data = await res.json()
+      setIsLoading(false)
       setCourseData(data.course)
     }catch(err){
       console.log("Client Error: Course Data fetching failed",err)
@@ -47,6 +52,7 @@ const CourseList = () => {
       </div>
 
       <div className="all-course">
+        {isLoading ? <Spinner/>: <></>}
         {
           courseData?.filter((course) =>  course.chapters?.some(chapter => chapter.lessons?.some(lesson => lesson.content)) && course?.courseTitle?.toLowerCase().replace(/\s+/g, "").includes(query?.toLowerCase().replace(/\s+/g, ""))).map((course)=>( 
             <CourseCard courseTitle={course.courseTitle} courseOwner={course.createdBy.username} 
