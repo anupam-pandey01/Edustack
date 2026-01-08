@@ -36,7 +36,7 @@ const AddCourse = ({ setMenu }) => {
     if(response.status == 401){
       checkToken("Token Expired");
     }
-
+    setIsLoading(false)
     // Redirect to my course section
     setMenu("mycourse")
   }
@@ -55,7 +55,7 @@ const AddCourse = ({ setMenu }) => {
         <label htmlFor="upload-thumbnail">{courseImage ? "Selected" :"Course Thumbnail"} <FaCloudUploadAlt size={30}/></label>
         <input type="file" id='upload-thumbnail' style={{display: "none"}} onChange={(e)=> setCourseImage(e.target.files[0])} required/>
       </div>
-      <button>Add Course</button>
+      <button disabled={isloading}>{isloading ? "Loading..." :"Add Course" }</button>
     </form>
   )
 }
