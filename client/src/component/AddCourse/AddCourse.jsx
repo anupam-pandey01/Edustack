@@ -3,6 +3,7 @@ import { FaCloudUploadAlt } from "react-icons/fa"
 import { useNavigate } from "react-router"
 import "./AddCourse.css"
 import { checkToken } from '../../utils/checkToken'
+import { handleError } from '../../utils/handler'
 
 
 
@@ -36,9 +37,15 @@ const AddCourse = ({ setMenu }) => {
     if(response.status == 401){
       checkToken("Token Expired");
     }
-    setIsLoading(false)
-    // Redirect to my course section
-    setMenu("mycourse")
+    const { success, message } = await response.json();
+
+    if(success){
+      setIsLoading(false)
+      setMenu("mycourse") // Redirect to my course section
+    }else{
+      handleError(message)
+      setIsLoading(false)
+    } 
   }
   return (
     <form className='add-course' onSubmit={handleFormData}>
@@ -53,7 +60,7 @@ const AddCourse = ({ setMenu }) => {
       </div>
       <div className='course-input upload-thumbnail'>
         <label htmlFor="upload-thumbnail">{courseImage ? "Selected" :"Course Thumbnail"} <FaCloudUploadAlt size={30}/></label>
-        <input type="file" id='upload-thumbnail' style={{display: "none"}} onChange={(e)=> setCourseImage(e.target.files[0])} required/>
+        <input type="file" id='upload-thumbnail' style={{display: "none"}} onChange={(e)=> setCourseImage(e.target.files[0])} />
       </div>
       <button disabled={isloading}>{isloading ? "Loading..." :"Add Course" }</button>
     </form>

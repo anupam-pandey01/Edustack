@@ -2,12 +2,18 @@ const mongoose = require("mongoose");
 const User = require("../model/user");
 const bcrypt  = require("bcryptjs");
 const jwt = require('jsonwebtoken');
-const Course = require('../model/course')
+const Course = require('../model/course');
+const { loginSchema, registerUserSchema } = require("../utils/validateSchema");
 
 // Controller for the Sign Up route
 async function registerUser(req, res){
     try{
         const {username, password, email, role} = req.body;
+
+        const { error } = registerUserSchema.validate(req.body);
+        if( error ){
+            return res.status(404).json({ success: false, message: error.details[0].message })
+        }
 
         const existUser = await User.findOne({$or: [{username}, {email}]});
         if(existUser){
@@ -45,6 +51,11 @@ async function registerUser(req, res){
 async function loginUser(req, res){
     try{
         const {email, password} = req.body;
+        const { error } = loginSchema.validate( req.body );
+        if( error ){
+            return res.status(404).json({ success: false, message: error.details[0].message });
+        }
+        
         const user = await User.findOne({email});
         if(!user){
             return res.status(404).json({ success: false, message: "Invalid username or password" }) 

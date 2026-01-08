@@ -1,12 +1,28 @@
 const Course = require("../model/course.js");
 const User = require("../model/user.js");
 const cloudinary = require("../config/cloudinaryConfig.js");
+const { uploadCourseSchema, addChapterSchema } = require("../utils/validateSchema.js");
 
 
 // Upload Course Data to cloud DB
 const uploadCourseData = async (req, res) => {
   try {
-    const { courseTitle, courseDescription } = req.body
+    const { courseTitle, courseDescription } = req.body;
+
+    // Validate Input from frontend
+    const { error } = uploadCourseSchema.validate(req.body);
+    if( error ){
+      return res.status(404).json({ success: false, message: error.details[0].message })
+    }
+    
+    // Thumbnail must be requried
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "Course thumbnail is required",
+      });
+    }
+
     const b64 = Buffer.from(req.file.buffer).toString("base64");
     let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
 
