@@ -48,14 +48,8 @@ const uploadCourseSchema = Joi.object({
     
 });
 
-const addChapterSchema = Joi.object({
-    chapterTitle: Joi.string()
-        .min(6)
-})
-
 module.exports = {
     loginSchema,
     registerUserSchema,
     uploadCourseSchema,
-    addChapterSchema
 }

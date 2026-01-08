@@ -30,9 +30,13 @@ const AddNewChapter = ({courseId, setCourseData, setPopOpen}) => {
           checkToken("Token Expired");
         }
 
-        const data = await res.json()
-        setCourseData(data.course)
-        setPopOpen(false)
+        const { success, message, course } = await res.json();
+        if(success){
+          setCourseData(course)
+          setPopOpen(false)
+        }else{
+          handleError(message)
+        }
       }catch(err){
         console.log(err);
         handleError(err);
