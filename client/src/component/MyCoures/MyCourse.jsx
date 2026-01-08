@@ -164,7 +164,7 @@ const handleDeleteLesson = async(chapterTitle, lessonId)=>{
       <div className="mycourse-section">
         {isloading ? <Spinner isloading={isloading}/>: <></>}
         {popOpen ?<AddNewChapter courseId={courseId} setCourseData={setCourseData} setPopOpen={setPopOpen}/>: <></> }
-        {courseData.map((course)=>(
+        {courseData?.map((course)=>(
             <div  className='mycourse-container' key={course._id}>
               <div className="mycourse-card">
                 <div className='mycourse-card-left'>
