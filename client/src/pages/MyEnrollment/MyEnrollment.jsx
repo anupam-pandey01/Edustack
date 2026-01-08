@@ -11,6 +11,7 @@ const MyEnrollment = () => {
   const { userId } = useParams();
 
   const navigate = useNavigate()
+
   useEffect(()=>{
     async function getMyEnrollment(){
       const token = localStorage.getItem("token");
@@ -59,6 +60,8 @@ const MyEnrollment = () => {
           </div>
         </div>
       ))}
+      {enrolledcourse ? <></> : handleError("You are not enrolled in any course")}
+      {enrolledcourse ? <></> : navigate("/course-list")}
     </div>
   )
 }
