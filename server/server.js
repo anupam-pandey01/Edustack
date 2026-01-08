@@ -8,13 +8,14 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
-// cors({
-//     origin: "*"
-// methods:["GET", "POST", "DELETE", "PUT"],
-// allowedHeaders: ["Content-Type", "Authorization"]
-// });
+const corsOptions = {
+origin: process.env.CLIENT_URL,
+methods:["GET", "POST", "DELETE", "PUT"],
+credentials: true,
+allowedHeaders: ["Content-Type", "Authorization"]
+};
 
-app.use(cors({origin: "*"}));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 
@@ -27,13 +28,13 @@ mongoose.connect(MONGO_URI)
 // Routes configuration
 app.use(mainRouter);
 
-// app.use((err, req, res, next)=>{
-//     console.log(err.stack);
-//     res.status(500).json({
-//         success: false,
-//         message: "Something went wrong"
-//     })
-// })
+app.use((err, req, res, next)=>{
+    console.log(err.stack);
+    res.status(500).json({
+        success: false,
+        message: "Something went wrong"
+    })
+})
 
 app.listen(PORT, ()=>{
     console.log(`Server is now running on ${PORT}`)
