@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from "react-router"
 import "./MyCourse.css"
-import thumbnail1 from "../../assets/thumbnail1.png"
 import { handleError, handleSuccess } from '../../utils/handler'
-import Spinner from '../Spinner/spinner'
+import Spinner from '../Spinner/Spinner'
 import { AiOutlineDelete } from "react-icons/ai"
 import { IoMdArrowDropdown } from "react-icons/io"
 import { IoMdArrowDropup } from "react-icons/io"

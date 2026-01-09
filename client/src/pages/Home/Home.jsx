@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react'
 import "./Home.css"
 import Hero from '../../component/Hero/Hero'
 import KeyBenefit from '../../component/KeyBenefit/KeyBenefit'
-import thumbnail2 from "../../assets/thumbnail2.jpg"
-import thumbnail3 from "../../assets/thumbnail3.png"
-import thumbnail4 from "../../assets/thumbnail4.png"
 import Testimonial from '../../component/Testimonial/Testimonial'
 import { Link } from 'react-router'
 import CourseCard from '../../component/CourseCard/CourseCard'

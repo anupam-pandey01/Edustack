@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import './CourseCard.css'
-import thumbnail1 from "../../assets/thumbnail1.png"
 import { Rating } from "react-simple-star-rating"
 import { Link } from 'react-router'
 

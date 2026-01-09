@@ -1,11 +1,10 @@
 import React from 'react'
 import "./MyEnrollment.css"
-import thumbnail from "../../assets/Thumbnail1.png"
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { handleError } from '../../utils/handler'
 import { useParams, useNavigate } from 'react-router'
-import Spinner from '../../component/Spinner/spinner'
+import Spinner from '../../component/Spinner/Spinner'
 
 const MyEnrollment = () => {
   const [enrolledcourse, setEnrolledCourse] = useState([]);

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import "./CourseList.css"
-import thumbnail1 from "../../assets/thumbnail1.png"
 import { Rating } from "react-simple-star-rating"
 import { FaHome } from "react-icons/fa";
 import CourseCard from '../../component/CourseCard/CourseCard'
 import { Link, useSearchParams } from 'react-router'
-import Spinner from '../../component/Spinner/spinner';
+import Spinner from '../../component/Spinner/Spinner';
 
 const CourseList = () => {
  const [courseData, setCourseData] = useState([]);
