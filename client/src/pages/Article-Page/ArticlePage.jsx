@@ -3,7 +3,7 @@ import "./ArticlePage.css";
 import ArticleSidebar from '../../component/ArticleSidebar/ArticleSidebar';
 import { useParams } from 'react-router';
 import DOMPurify from "dompurify";
-import Spinner from '../../component/Spinner/spinner';
+import Spinner from '../../component/Spinner/Spinner';
 
 const ArticlePage = () => {
   const { courseId } = useParams();
