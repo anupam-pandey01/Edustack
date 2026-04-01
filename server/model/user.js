@@ -32,6 +32,10 @@ const userSchema = new Schema({
         type: String,
         enum: ['instructor', 'student']
     },
+    isVerified:{
+        type: Boolean,
+        default: false
+    },
     enrolledStudent:[ enrolledSchema ],
     enrolledCourse:[
         {
@@ -39,6 +43,8 @@ const userSchema = new Schema({
             ref: "Course"
         }
     ]
+}, {
+    timestamps: true
 });
 
 const User = mongoose.model("User", userSchema);

@@ -33,6 +33,16 @@ const loginSchema = Joi.object({
     role: Joi.string()
 });
 
+const verifyCodeSchema = Joi.object({
+    verificationCode: Joi.string()
+        .pattern(/^[0-9]{6}$/)
+        .required()
+        .messages({
+            'string.pattern.base': 'Verification code must be 6 digits.',
+            'any.required': 'Verification code is required.'
+        })
+});
+
 const uploadCourseSchema = Joi.object({
   courseTitle: Joi.string()
     .min(10)
@@ -48,8 +58,11 @@ const uploadCourseSchema = Joi.object({
     
 });
 
+
+
 module.exports = {
     loginSchema,
     registerUserSchema,
+    verifyCodeSchema,
     uploadCourseSchema,
 }

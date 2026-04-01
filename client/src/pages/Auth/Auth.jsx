@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import "./Auth.css"
 import { useNavigate } from "react-router"
-import signupHandleSubmit from '../../utils/signupHandle';
-import loginHandleSubmit from '../../utils/loginHandle';
 import { useAuth } from '../../AuthContext';
-import { ToastContainer } from "react-toastify"
 import { handleError, handleSuccess } from '../../utils/handler';
+import { login, signup } from '../../services/authService';
+import { validateAuthInputs } from '../../utils/validators';
 
 
 const Auth = () => {
@@ -32,39 +31,44 @@ const Auth = () => {
 
   // Function for form submit ( SIGN-UP and LOG-IN STATE )
   async function handleSubmit(e){
+    e.preventDefault()
+
+    const validationError = validateAuthInputs(authState, authData);
+    if (validationError) {
+      handleError(validationError);
+      return;
+    }
+
     if(authState === "Sign up"){
-      const {success, message, token, userId} = await signupHandleSubmit(e, authData);
-      if(success){
-        localStorage.setItem("token", token);
-        localStorage.setItem("userId", userId);
-        setIsLoggedIn(true);
-        setCurrentUser(userId)
-        setTimeout(()=>{
-          handleSuccess(message);
-        }, 2000)
-        navigate("/");
-      }else{
-        handleError(message);
-        console.log(message);
+      try{
+        const { data } = await signup(authData);
+
+        if(data.success){
+          navigate("/verify-otp");
+          handleSuccess(data.message);
+        }
+      }catch(err){
+        const msg = err.response?.data?.message || "Sign up failed";
+        handleError(msg);
       }
     }
 
     // Login State
     if(authState === "Login"){
-      const {success, message, token, userId} = await loginHandleSubmit(e, authData); 
-      if(success){
-        localStorage.setItem("token", token);
-        localStorage.setItem("userId", userId);
-        setIsLoggedIn(true);
-        setCurrentUser(userId)
-        handleSuccess(message);
-        setTimeout(()=>{
-          navigate("/");
-        }, 2000)
-        
-      }else{
-        handleError(message);
-        console.log(message);
+      try{  
+        const { data } = await login(authData);
+
+        if(data.success){
+          setIsLoggedIn(true);
+          setCurrentUser(data.userId)
+          handleSuccess(data.message);
+          setTimeout(()=>{
+            navigate("/");
+          }, 2000)
+        }
+      }catch(err){
+        const msg = err.response?.data?.message || "Login failed"
+        handleError(msg)
       }
     }
   }

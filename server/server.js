@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser")
 const mainRouter = require("./routes/main.router");
 
 const app = express();
@@ -17,13 +18,14 @@ allowedHeaders: ["Content-Type", "Authorization"]
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser())
 
 
 
 // Database connetion
 mongoose.connect(MONGO_URI)
 .then(()=>console.log("Database is connected"))
-.catch((e)=> console.log(e));
+.catch((err) => console.error(err));
 
 // Routes configuration
 app.use(mainRouter);

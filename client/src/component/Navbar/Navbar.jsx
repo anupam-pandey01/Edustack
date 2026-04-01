@@ -4,19 +4,10 @@ import logo from "../../assets/logo.svg"
 import { Link, useNavigate } from 'react-router'
 import userIcon from "../../assets/userIcon.png"
 import { useAuth } from '../../AuthContext'
-import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { currentUser, isLoggedIn, setCurrentUser, setIsLoggedIn } = useAuth();
-  
-
-  function handleLogout(){
-    setIsLoggedIn(false);
-    setCurrentUser(null);
-    localStorage.removeItem("userId");
-    localStorage.removeItem("token");
-  }
+  const { logout, currentUser, isLoggedIn, loading } = useAuth();
 
   function handleButton(){
     navigate("/auth")
@@ -32,19 +23,19 @@ const Navbar = () => {
         </Link>
         
       </div>
-      { isLoggedIn ? 
+      { loading ? null : ( isLoggedIn ? 
         <div className="navbar-profile">
           <div>
             <img src={userIcon} alt="icon" className='user-logo' />
             <div className="dropdown">
               <Link to={`/educator/${currentUser}`}><p className='dropdown-dashboard' >Dashboard</p></Link>
               <Link to={`/enrollment/${currentUser}`}><p className='dropdown-enroll' >My Enrollment</p></Link>
-              <p onClick={ handleLogout } className='dropdown-logout'>Log out</p>
+              <p onClick={ () => logout() } className='dropdown-logout'>Log out</p>
             </div>
           </div>   
         </div>
 
-      : <button onClick={handleButton}>Create a account</button> }
+      : <button onClick={handleButton}>Create a account</button> )}
     </div>
   )
 }

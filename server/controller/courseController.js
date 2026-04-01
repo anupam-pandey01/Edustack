@@ -9,7 +9,7 @@ const getCourseData = async (req, res)=>{
             select: '-password -email' // Exclude both fields with a space
         })
         res.status(200).json({course: course})
-    }catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({message: "Error During the Course Data Fetching", success: false})
     }
@@ -32,7 +32,7 @@ const getCourseDetail = async (req, res)=>{
         });
 
         res.status(200).json(courseDetail);
-    }catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Error during fetching course detail", success: false})
     }
@@ -53,7 +53,7 @@ const getFullArticle = async (req, res)=>{
             return res.status(400).json({message: "Bad Request"})
         }
         res.status(200).json({success: true, course});
-    }catch(err){
+    } catch (err) {
         console.log("Error during the fetching full article", err);
         res.status(500).json({message: "Server error", sucess: false})
     }
@@ -80,7 +80,7 @@ const getMyEnrollment = async (req, res)=>{
 
         return res.status(200).json({enrolledcourse: user.enrolledCourse});
 
-    }catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({message: "Server Error", success: false});
     }
@@ -101,7 +101,7 @@ const checkEnrolled = async(req, res)=>{
             }
         }
         return res.status(404).json({success: false});
-    }catch(err){
+    } catch (err) {
         console.log(err)
        return res.status(500).json({ message: "Error during check the user enrolled in course or not"})
     }

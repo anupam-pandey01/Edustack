@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import "./services/interceptors"
 import Navbar from './component/Navbar/Navbar'
 import Auth from './pages/Auth/Auth'
 import { Routes, Route, useLocation, Navigate} from 'react-router'
@@ -17,6 +18,7 @@ import LaunchingPage from './pages/Launch/LaunchingPage'
 import AboutUs from './pages/AboutUs/AboutUs'
 import ContactUs from './pages/ContactUs/ContactUs'
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy'
+import OtpVerification from './pages/OtpVerification/OtpVerification'
 
 const App = () => {
   const { isLoggedIn } = useAuth();
@@ -27,6 +29,7 @@ const App = () => {
       <Routes>
         {/* Public Route */}
         <Route path='/auth' element={isLoggedIn ? <Navigate to="/" replace/> :<Auth/>}/>
+        <Route path='/verify-otp' element={isLoggedIn ? <Navigate to="/" replace/>: <OtpVerification/> }/>
         <Route path="/" element={<Home/>}/>
         <Route path='/course-list' element={<CourseList/>}/>
         <Route path='/course-list/:courseId' element={<CourseDescription/>}/>

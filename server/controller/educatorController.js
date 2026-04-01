@@ -75,7 +75,7 @@ const addChapter = async (req, res)=>{
 
     res.status(201).json({ message: "New Chapter Added", success: true, course: updatedCourse });
 
-  }catch(err){
+  } catch (err) {
     console.log("Error during the adding chapter", err);
     res.status(500).json({message: "Server Error"});
   }
@@ -120,7 +120,7 @@ const addLesson = async (req, res)=>{
       success: true,
       course: updatedCourse,
     })
-  }catch(err){
+  } catch (err) {
     console.log("Error during adding lesson", err);
     res.status(500).json({message: "Server Error"})
   }
@@ -136,7 +136,7 @@ const getCourseData = async (req, res)=>{
       return res.status(404).json({message: "No course found for this educator", success: false})
     }
     res.status(200).json({ data: courseData, success: true })
-  }catch(err){
+  } catch (err) {
     console.error("Error during the fetching the course data for educator", err);
     res.status(500).json({message: "Server Error", success: false})
   }
@@ -175,7 +175,7 @@ const fecthLessonContent = async(req, res)=>{
 
     const html = lesson.content
     res.status(200).json({html})
-  }catch(err){
+  } catch (err) {
     console.log("Error during fetching lesson content", err);
     res.status(500).json({message: "Server error", success: false})
   }
@@ -220,7 +220,7 @@ const saveLessonContent = async (req, res)=>{
     lesson.content = html
     await course.save()
     res.status(200).json({message: "Updated Successfully", success: true, course})
-  }catch(err){
+  } catch (err) {
     console.log(err);
     res.status(500).json({message: "Server Error", success: false})
   }
@@ -264,7 +264,7 @@ const enrolledStudent = async (req, res)=>{
     )
 
     return res.status(201).json({message: "Enrolled Successfully", success: true})
-  }catch(err){
+  } catch (err) {
     console.log(err)
     res.status(500).json({message: "Enrollement Failed", success: false})
   }
@@ -288,7 +288,7 @@ const deleteCourse = async(req, res)=>{
         )
         const updatedCourse = await Course.find({createdBy: userId});
         return res.status(200).json({message: "Course Deleted Successfully", success: true, course: updatedCourse});
-    }catch(err){
+    } catch (err) {
         console.log(err)
         res.status(500).json({message: "Server Error", success: false});
     }
@@ -322,7 +322,7 @@ const getHtml = async(req, res)=>{
     }
 
     return res.status(200).json({ lesson: lesson, success: true });
-  }catch(err){
+  } catch (err) {
     console.log(err);
     return res.status(500).json({message: "Server Error", success: false});
   }
@@ -358,7 +358,7 @@ const saveHtml = async(req, res)=>{
     lesson.content = html;
     await course.save()
     return res.status(200).json({ message: "Lesson updated successfully", success: true });
-  }catch(err){
+  } catch (err) {
     console.log(err);
     return res.status(500).json({message: "Server Error", success: false});
   }
@@ -384,7 +384,7 @@ const deleteLesson = async(req, res)=>{
       const result = await course.save();
       const updatedCourse = await Course.find({createdBy: course.createdBy});
       res.status(200).json({message: `${lesson[0].lessonTitle} Delete Successfully`, success: true, updatedCourse})
-    }catch(err){
+    } catch (err) {
       console.log(err);
       res.status(500).json({ message:"Server Error", success: false})
     }
