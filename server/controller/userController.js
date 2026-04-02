@@ -51,9 +51,10 @@ async function registerUser(req, res){
             message: emailMsg
         })
     } catch (err) {
+        console.log("Error during registerUser", err);
         res.status(500).json({
             success: false,
-            message: `Server Error: ${err.message}`
+            message: "Server Error"
         })
     }
 }
@@ -89,6 +90,7 @@ async function verifyCode(req, res){
             httpOnly: true,
             secure: process.env.Node_env == true, // true in production process.env.Node_env == "production"
             sameSite: "Strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000
         });
         
         await client.del(`pending_user:${verificationCode}`);
@@ -100,9 +102,10 @@ async function verifyCode(req, res){
             userId: result._id
         })
     } catch (err) {
+        console.error("Error during verifyCode", err);
         res.status(500).json({
             success: false,
-            message: `Server Error: ${err.message}`
+            message: "Server Error"
         })
     }
 }
@@ -139,7 +142,7 @@ async function loginUser(req, res){
 
         res.status(200).json({success: true, message: "Login Successfully", userId: user._id, accessToken}) 
     } catch (err) {
-        console.log(err)
+        console.error("Error during loginUser", err)
         res.status(500).json({
             success: false,
             message: "Server Error"
@@ -163,7 +166,7 @@ async function getRefreshToken(req, res){
             res.status(200).json({ success: true, accessToken: newAccessToken, userId: decoded.userId });
         });
     } catch (err) {
-        console.log(err)
+        console.Error("Error during getRefreshToken", err)
         res.status(500).json({ success: false, message: "Server Error" });
     }
 }
@@ -178,7 +181,7 @@ async function logout(req, res){
         res.json({ success: true, message: "Logged out successfully" });
 
     } catch (err) {
-        console.log(err)
+        console.error("Error during logout", err);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 }
@@ -194,7 +197,7 @@ async function getEducatorData(req, res){
         return res.status(200).json({user: user, totalCourse: course.length})
 
     } catch (err) {
-        console.log("Error during fetching the user data", err);
+        console.log("Error during fetching getEducatorData", err);
         res.status(500).json({message: "Sever Error", success: false})
     }
 }
