@@ -42,11 +42,11 @@ const uploadCourseData = async (req, res) => {
     res.status(201).json({
       message: "Course uploaded successfully",
       success: true,
-      result: result
     });
-  } catch (error) {
-    console.error("Error during the uploading the course data",error)
-    res.status(500).json({ error: error.message });
+
+  } catch (err) {
+    console.error("Error during the uploadCourseData", err);
+    res.status(500).json({ message: "Server Error" });
   }
 };
 

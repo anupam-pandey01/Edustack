@@ -7,7 +7,7 @@ const auth = require("../Middleware/Auth");
 
 
 
-educatorRouter.post("/uploadsCourseData", auth, upload.single("courseImage"), uploadCourseData);
+educatorRouter.post("/upload/CourseData", auth, upload.single("courseImage"), uploadCourseData);
 educatorRouter.get("/getCourseData/:userId", auth, getCourseData);
 educatorRouter.delete("/course/:userId/:courseId", auth, deleteCourse);
 educatorRouter.post("/chapter/new/:courseId", auth, addChapter);

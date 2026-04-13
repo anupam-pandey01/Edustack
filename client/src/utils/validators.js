@@ -34,3 +34,38 @@ export const validateOtpInput = (code) => {
   }
   return null;
 };
+
+export const isValidCourseTitle = (title) => {
+  return typeof title === "string" && title.trim().length >= 10;
+};
+
+export const isValidCourseDescription = (description) => {
+  return typeof description === "string" && description.trim().length >= 30;
+};
+
+export const isValidCourseImage = (file) => {
+  return file instanceof File && file.type.startsWith("image/");
+};
+
+export const validateCourseInputs = ({ courseTitle, courseDescription, courseImage }) => {
+
+  if (!courseTitle) {
+    return "Course title is required.";
+  } else if (!isValidCourseTitle(courseTitle)) {
+    return "Title must be at least 10 characters.";
+  }
+
+  if (!courseDescription) {
+    return "Course description is required.";
+  } else if (!isValidCourseDescription(courseDescription)) {
+    return "Description must be at least 30 characters.";
+  }
+
+  if (!courseImage) {
+    return "Course thumbnail is required.";
+  } else if (!isValidCourseImage(courseImage)) {
+    return "Please select a valid image file.";
+  }
+
+  return null;
+};

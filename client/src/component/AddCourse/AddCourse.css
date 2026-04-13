@@ -53,3 +53,13 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.field-error{
+    margin-top: 6px;
+    font-size: 14px;
+    color: #d93025;
+}
+
+.upload-thumbnail .field-error{
+    margin-left: 2px;
+}
