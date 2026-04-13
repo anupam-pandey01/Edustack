@@ -7,7 +7,7 @@ userRouter.post("/login", loginUser);
 userRouter.post("/verify-code", verifyCode);
 userRouter.post("/refresh-token", getRefreshToken);
 userRouter.post("/logout", logout);
-userRouter.get("/getUserdetail/:userId",auth, getEducatorData);
+userRouter.get("/educator/:userId", auth, getEducatorData);
 
 
 module.exports = userRouter;

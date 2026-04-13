@@ -197,7 +197,7 @@ async function getEducatorData(req, res){
         return res.status(200).json({user: user, totalCourse: course.length})
 
     } catch (err) {
-        console.log("Error during fetching getEducatorData", err);
+        console.Error("Error during fetching getEducatorData", err);
         res.status(500).json({message: "Sever Error", success: false})
     }
 }

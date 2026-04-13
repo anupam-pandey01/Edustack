@@ -5,30 +5,19 @@ import student from "../../assets/student.png"
 import enrolled from "../../assets/enrolled.svg"
 import { handleError } from '../../utils/handler'
 import { checkToken } from '../../utils/checkToken'
+import { educatorDetails } from '../../services/educatorDetails'
 
 const Dashboard = ({userId}) => {
   const [data, setData] = useState({});
   const [totalCourse, setTotalCourse] = useState(null);
-  const token = localStorage.getItem("token");
+
 
   useEffect(()=>{
     async function getUserData(){
       try{
-        const url = `${import.meta.env.VITE_BASE_URL}/getUserdetail/${userId}`;
-        const res = await fetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          }
-        });
-
-        if(res.status == 401){
-          checkToken("Token Expired");
-        }
-        const {user, totalCourse} = await res.json();
-        setData(user);
-        setTotalCourse(totalCourse);
+       const res = await educatorDetails(userId);
+        setData(res.data.user);
+        setTotalCourse(res.data.totalCourse);
       }catch(err){
         console.log(err);
         handleError(err);
