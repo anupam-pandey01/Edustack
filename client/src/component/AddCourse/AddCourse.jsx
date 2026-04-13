@@ -39,7 +39,7 @@ const AddCourse = ({ setMenu }) => {
       if (!data) return;
 
       if (data.success) {
-        // setMenu("mycourse");
+        setMenu("mycourse");
       } else {
         handleError(data.message);
       }
@@ -65,8 +65,7 @@ const AddCourse = ({ setMenu }) => {
         <label htmlFor="upload-thumbnail">{courseImage ? "Selected" :"Course Thumbnail"} <FaCloudUploadAlt size={30}/></label>
         <input type="file" id='upload-thumbnail' style={{display: "none"}} onChange={(e)=> setCourseImage(e.target.files[0])} />
       </div>
-      {/* <button disabled={isloading}>{isloading ? "Loading..." :"Add Course" }</button> */}
-      <button>Add Course</button>
+      <button disabled={isloading}>{isloading ? "Loading..." :"Add Course" }</button>
     </form>
   )
 }
